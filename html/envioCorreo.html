@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña - KeyArg</title>
+    <link rel="icon" href="../img/icono.png" type="image/png">
+<script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/styleEnvioCorreo.css">
+</head>
+<body>
+     <header class="navbar-top">
+    <div class="container">
+      <a href="/html/home.html" class="logo">Key Arg</a>
+
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+
+
+
+<div class="password-recovery-container">
+    <h2 class="password-recovery-title">Te hemos enviado un correo electrónico</h2>
+    <p class="password-recovery-description">
+      Abre el correo electrónico y haz clic en el botón que verás dentro para cambiar tu contraseña.
+    </p>
+  </div>
+
+
+  <footer class="footer">
+        <div class="footer-col">
+          <h1 class="logo">Key Arg</h1>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="medios-pago">
+            <img src="../img/visa.png" alt="Visa">
+            <img src="../img/ms.png" alt="MasterCard">
+            <img src="../img/mp.png" alt="Mercado Pago">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+            <li><a href="../html/home.html">Inicio</a></li>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+</body>
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+<script src="/js/navbarEventos.js"></script>
+</html>

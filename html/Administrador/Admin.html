@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - KeyArg</title>
+  <link rel="stylesheet" href="/css/Admin/styleAdmin.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex min-h-screen">
+    <aside class="w-64 bg-gray-900 text-white flex flex-col p-6">
+      <h1 class="text-3xl logo-font text-cyan-400 mb-10 text-center">KeyArg Admin</h1>
+      <nav class="flex flex-col gap-4">
+        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Dashboard</a>
+        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Agregar Clave</a>
+        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Ver Claves</a>
+        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Pedidos</a>
+        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Usuarios</a>
+      </nav>
+      <br>
+      <br>
+      <br>
+      <br>
+<button id="cerrar-sesion"
+        class="mt-10 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition">
+  Cerrar sesión
+</button>
+
+</aside>
+
+
+    
+    <main class="flex-1 p-8">
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800">Panel de Control</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-cyan-400">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Total de Claves Activas</h3>
+          <p class="text-2xl font-bold text-gray-700">124</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-400">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Stock Bajo</h3>
+          <p class="text-gray-700">7 claves con menos de 3 unidades</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-400">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Últimas Ventas</h3>
+          <p class="text-gray-700">GTA V (Steam) vendido hace 3 min</p>
+        </div>
+        
+      </div>
+    </main>
+    
+  </div>
+</body>
+<script>
+  const cerrarSesion = document.getElementById('cerrar-sesion');
+
+  if (cerrarSesion) {
+    cerrarSesion.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      try {
+        const res = await fetch('http://localhost:3000/api/logout', {
+          method: 'POST'
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          window.location.href = '/html/home.html';
+        } else {
+          alert('No se pudo cerrar sesión.');
+        }
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        alert('Error al cerrar sesión.');
+      }
+    });
+  }
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/sesion');
+      const data = await res.json();
+
+      if (!data.usuario) {
+        window.location.href = '/html/IniciarSesion.html';
+      } else if (data.usuario.rol !== 'admin') {
+        window.location.href = '/html/home.html';
+      }
+    } catch (error) {
+      console.error('Error al validar sesión:', error);
+      window.location.href = '/html/home.html';
+    }
+  });
+</script>
+
+</html>

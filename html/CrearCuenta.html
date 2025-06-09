@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrearCuenta - KeyArg</title>
+    <link rel="icon" href="../img/icono.png" type="image/png">
+    <link rel="stylesheet" href="/css/styleCrearCuenta.css">
+    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+     <header class="navbar-top">
+    <div class="container">
+      <a href="/html/home.html" class="logo">Key Arg</a>
+
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+
+
+<div class="register-container">
+  <h2>Crea una nueva cuenta</h2>
+  <p>¡Consulta el historial de pedidos, consigue una biblioteca gaming y realiza tus compras más rápidamente!</p>
+
+  <form>
+    <label for="email">Correo electrónico</label>
+    <input type="email" id="email" required />
+
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" required oninput="validatePassword()" />
+
+    <ul class="password-rules">
+      <li id="length" class="invalid"> Entre 8 y 70 caracteres</li>
+      <li id="special" class="invalid"> Contiene un carácter o dígito especial</li>
+      <li id="number" class="invalid">Mínimo 1 número</li>
+      <li id="lower" class="invalid"> Mínimo 1 letra minúscula</li>
+      <li id="upper" class="invalid"> Mínimo 1 letra mayúscula</li>
+    </ul>
+
+    <button class="register-button" type="submit">Continuar</button>
+  </form>
+
+  <p class="login-link">¿Ya tienes una cuenta? <a href="./IniciarSesion.html">Iniciar Sesión</a></p>
+</div>
+
+
+
+  <footer class="footer">
+        <div class="footer-col">
+          <h1 class="logo">Key Arg</h1>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="medios-pago">
+            <img src="../img/visa.png" alt="Visa">
+            <img src="../img/ms.png" alt="MasterCard">
+            <img src="../img/mp.png" alt="Mercado Pago">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+           <li><a href="../html/home.html">Inicio</a></li>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+
+</body>
+<script src="/js/validarContrasena.js"></script>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+<script src="/js/navbarEventos.js"></script>
+<script>
+  // Validación en vivo desde validarContrasena.js
+  document.getElementById('password').addEventListener('input', (e) => {
+    validatePassword(e.target.value);
+  });
+
+  // Envío del formulario
+  document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const usuario = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Validaciones básicas
+    if (!usuario || !password) {
+      alert('Debes completar todos los campos');
+      return;
+    }
+
+    // Validación de reglas de contraseña (como en perfil)
+    const cumpleReglas =
+      password.length >= 8 && password.length <= 70 &&
+      /[\W\d]/.test(password) &&
+      /[a-z]/.test(password) &&
+      /[A-Z]/.test(password);
+
+    if (!cumpleReglas) {
+      alert('La contraseña no cumple con los requisitos mínimos.');
+      return;
+    }
+
+    // Enviar al backend
+    try {
+      const res = await fetch('http://localhost:3000/api/registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Cuenta creada exitosamente');
+        window.location.href = '/html/perfilUsuario.html';
+      } else {
+        alert(data.mensaje || 'No se pudo crear la cuenta');
+      }
+
+    } catch (error) {
+      console.error('Error al registrar:', error);
+      alert('Error en la conexión al servidor');
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/sesion');
+      const data = await res.json();
+
+      if (data.usuario) {
+        if (data.usuario.rol === 'admin') {
+          window.location.href = '/html/Administrador/Admin.html';
+        } else {
+          window.location.href = '/html/perfilUsuario.html';
+        }
+      }
+    } catch (error) {
+      console.error('Error al verificar sesión:', error);
+      // En caso de error, dejamos que continúe en la página
+    }
+  });
+</script>
+
+</html>

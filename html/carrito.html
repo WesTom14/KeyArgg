@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - KeyArg</title>
+    <link rel="stylesheet" href="../css/styleCarrito.css">
+    <link rel="icon" href="../img/icono.png" type="image/png">
+    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <header class="navbar-top">
+    <div class="container">
+       <a href="/html/home.html" class="logo">Key Arg</a>
+
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+
+<body id="carrito-compra" class="bg-gray-100 font-sans">
+
+  <div class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6">
+      
+      <!-- Carrito -->
+      <h1 class="text-2xl font-bold mb-4 flex items-center gap-2">🛒 Tu Carrito</h1>
+      <div id="items-carrito" class="space-y-3 mb-6">  
+      </div>
+      <!-- Mensaje su esta vacio !-->
+      <p id="carrito-vacio" class="text-gray-500 text-sm hidden">Tu carrito está vacío.</p>
+
+      <!-- Recomendaciones -->
+    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🎮 Recomendaciones</h2>
+    <div id="recomendaciones-carrito" class="space-y-3 mb-8">
+      </div>
+
+      <!-- Ofertas del día -->
+      <h2 class="text-xl font-bold mb-4">🔥 Ofertas del día</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        <div class="flex items-center bg-white p-3 rounded-lg shadow">
+          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg" class="w-20 h-14 rounded object-cover mr-4">
+          <div>
+            <p class="font-semibold">PUBG: Battlegrounds</p>
+            <p class="text-sm text-gray-500">Steam Key</p>
+            <p class="text-sm font-bold text-green-600 mt-1">$3500 ARS</p>
+          </div>
+        </div>
+        <div class="flex items-center bg-white p-3 rounded-lg shadow">
+          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg" class="w-20 h-14 rounded object-cover mr-4">
+          <div>
+            <p class="font-semibold">GTA V</p>
+            <p class="text-sm text-gray-500">Steam Key</p>
+            <p class="text-sm font-bold text-green-600 mt-1">$4200 ARS</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beneficios -->
+      <div class="bg-white p-6 rounded shadow text-center space-y-4">
+        <h3 class="text-xl font-bold text-gray-800">🎁 ¿Por qué comprar con nosotros?</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
+          <p>✅ Entrega inmediata</p>
+          <p>🔒 Pagos seguros</p>
+          <p>📞 Soporte 24/7</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Resumen de compra -->
+    <aside class="size-43 md:w-1/4 bg-cyan-950 text-white p-6 rounded-lg">
+      <h2 class="text-lg font-bold mb-4">Resumen</h2>
+      <div class="space-y-2 mb-4 text-sm">
+        <div class="flex justify-between">
+  <span>Precio oficial</span><span id="precio-oficial">--</span>
+</div>
+<div class="flex justify-between text-red-400 border-b border-red-400 pb-2">
+  <span>Descuento</span><span id="descuento">--</span>
+</div>
+<div class="flex justify-between font-bold text-lg pt-2">
+  <span>Subtotal</span><span id="total-carrito">$0</span>
+</div>
+      </div>
+      <button class="bg-sky-500 hover:bg-sky-600 w-full py-2 rounded font-semibold text-white">
+        Continuar al pago
+      </button>
+    </aside>
+
+  </div>
+
+
+  <footer class="footer">
+        <div class="footer-col">
+          <a href="/html/home.html" class="logo">Key Arg</a>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="flex items-center gap-2 mt-2">
+            <img src="../img/visa.png" alt="Visa" class="w-[50px] bg-white rounded p-1 shadow-md">
+            <img src="../img/ms.png" alt="MasterCard" class="w-[50px] bg-white rounded p-1 shadow-md">
+            <img src="../img/mp.png" alt="Mercado Pago" class="w-[50px] bg-white rounded p-1 shadow-md">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+            <li><a href="../html/home.html">Inicio</a></li>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+      <script src="/js/carrito.js"></script>
+      <script src="/js/navbarEventos.js"></script>
+      <script src="../utils/utilsCarrito.js"></script>
+<!-- Menu Hamburguesa -->
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+
+</body>
+
+</html>

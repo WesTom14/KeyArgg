@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../img/icono.png" type="image/png">
+  <title>KeyArg - Tienda de Juegos</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <header class="navbar-top">
+    <div class="container">
+    <a href="/html/home.html" class="logo">Key Arg</a>
+
+
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="#categorias" class="generos">Géneros</a></li>
+      <li><a href="#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+  
+      <section id="tendencias" class="tendencias">
+        <h2>Tendencias</h2>
+        <div class="tendencias-grid">
+          <div class="juego"> 
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="seccion-recomendaciones" class="seccion-juegos">
+        <h2>Recomendaciones para vos</h2>
+        <div class="seccion-juegos-grid">
+          <div class="card-juego"> 
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="card-juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="card-juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+        </div>
+      </section>
+      
+
+      <section id="beneficios-id" class="beneficios">
+        <div class="beneficio">
+          <img src="../img/descarga-removebg-preview.png" alt="Multiplataforma">
+          <div>
+            <h3>Multiplataforma</h3>
+            <p>Encontrá tu juego favorito en la plataforma que desees</p>
+          </div>
+        </div>
+        <div class="beneficio">
+          <img src="../img/descargacha-removebg-preview.png" alt="Precios competitivos">
+          <div>
+            <h3>Precios competitivos</h3>
+            <p>Buscamos ofrecerte los mejores precios del mercado argentino.</p>
+          </div>
+        </div>
+        <div class="beneficio">
+          <img src="../img/like-removebg-preview.png" alt="100% Personalizado">
+          <div>
+            <h3>100% Personalizado</h3>
+            <p>Te sugerimos juegos según tus gustos y las tendencias actuales</p>
+          </div>
+        </div>
+      </section>
+      
+
+      <section id="masvendido" class="seccion-juegos">
+        <h2>Más vendidos</h2>
+        <div class="seccion-juegos-grid">
+          <div class="card-juego"> 
+            <img src="" alt="">
+            <p></p>
+          </div>  
+          <div class="card-juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="card-juego">
+            <img src="" alt="Schedule">
+            <p></p>
+          </div>
+          <div class="card-juego"> 
+            <img src="" alt="">
+            <p></p>
+          </div>  
+          <div class="card-juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+          <div class="card-juego">
+            <img src="" alt="">
+            <p></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="ofertas" class="ofertas">
+      <div class="ofertas-contenedor">
+  <div class="ofertas-texto">
+    <h2>Descuentos en juegos seleccionados</h2>
+    <p>Renovamos cada semana.<br>¡Aprovechá antes que se acabe!</p>
+  </div>
+
+  <div class="ofertas-contador">
+    <div class="bloque-tiempo"><span id="dias">00</span><p>Días</p></div>
+    <div class="separador">:</div>
+    <div class="bloque-tiempo"><span id="horas">00</span><p>Horas</p></div>
+    <div class="separador">:</div>
+    <div class="bloque-tiempo"><span id="minutos">00</span><p>Minutos</p></div>
+  </div>
+</div>
+          
+        </div>
+      
+        <div class="ofertas-juegos">
+          <div class="card-juego"> 
+            <img src="" alt="">
+            <div class="etiqueta-descuento">-70%</div>
+            <p></p>
+          </div>
+          <div class="card-juego">
+            <img src="" alt="">
+            <div class="etiqueta-descuento">-70%</div>
+            <p></p>
+          </div>
+          <div class="card-juego">
+            <img src="" alt="">
+            <div class="etiqueta-descuento">-70%</div>
+            <p></p>
+          </div>
+        </div>
+      </section>
+      
+      
+
+      <section id="categorias" class="seccion-juegos">
+        <h2>Explorar por categorías</h2>
+        <div class="seccion-juegos-grid">
+          <div class="card-juego">
+            <img src="../img/gtav.jpg" alt="RPG">
+            <div class="texto-superpuesto">Mundo Abierto</div> 
+          </div>
+          <div class="card-juego">
+            <img src="../img/assasins.jpg" alt="FPS">
+            <div class="texto-superpuesto">Aventura</div>
+          </div>
+          <div class="card-juego">
+            <img src="../img/balatro.jpg" alt="Deportes">
+            <div class="texto-superpuesto">Estrategia</div>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="footer">
+        <div class="footer-col">
+          <a href="/html/home.html" class="logo">Key Arg</a>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="medios-pago">
+            <img src="../img/visa.png" alt="Visa">
+            <img src="../img/ms.png" alt="MasterCard">
+            <img src="../img/mp.png" alt="Mercado Pago">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+      <script src="/js/scriptTiempo.js"></script>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+
+<script src="/js/cargarSecciones.js"></script>
+<script src="../js/detalleJuego.js"></script>
+<script src="../js/perfil-Usuario.js"></script>
+<script src="/js/navbarEventos.js"></script>
+<script src="../utils/utilsCarrito.js"></script>
+<script src="/js/carrito.js"></script>
+</body>
+</html>

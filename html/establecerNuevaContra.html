@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contraseña Nueva - KeyArg</title>
+    <link rel="icon" href="../img/icono.png" type="image/png">
+    <link rel="stylesheet" href="/css/styleEstablecerNuevaContra.css">
+    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+     <header class="navbar-top">
+    <div class="container">
+      <a href="/html/home.html" class="logo">Key Arg</a>
+
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+
+
+<div class="register-container">
+  <h2>Establecer una nueva contraseña</h2>
+
+  <form>
+
+    <label for="password">Nueva Contraseña</label>
+    <input type="password" id="password" required oninput="validatePassword()" />
+
+    <ul class="password-rules">
+      <li id="length" class="invalid"> Entre 8 y 70 caracteres</li>
+      <li id="special" class="invalid"> Contiene un carácter o dígito especial</li>
+      <li id="number" class="invalid">Mínimo 1 número</li>
+      <li id="lower" class="invalid"> Mínimo 1 letra minúscula</li>
+      <li id="upper" class="invalid"> Mínimo 1 letra mayúscula</li>
+    </ul>
+
+    <button class="register-button" type="submit">Guardar y Iniciar Sesion</button>
+  </form>
+
+</div>
+
+
+
+  <footer class="footer">
+        <div class="footer-col">
+          <h1 class="logo">Key Arg</h1>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="medios-pago">
+            <img src="../img/visa.png" alt="Visa">
+            <img src="../img/ms.png" alt="MasterCard">
+            <img src="../img/mp.png" alt="Mercado Pago">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+           <li><a href="../html/home.html">Inicio</a></li>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+
+</body>
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+<script src="/js/navbarEventos.js"></script>
+<script src="/js/validarContrasena.js"></script>
+<script>
+  // Obtener el email desde la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const email = urlParams.get("email");
+
+  if (!email) {
+    alert("Error: No se encontró un correo válido en el enlace.");
+    window.location.href = "/html/contrasenaOlvidada.html";
+  }
+
+  document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nueva = document.getElementById("password").value.trim();
+
+    // Validación de contraseña
+    const cumpleReglas =
+      nueva.length >= 8 && nueva.length <= 70 &&
+      /[!@#$%^&*0-9]/.test(nueva) &&
+      /[a-z]/.test(nueva) &&
+      /[A-Z]/.test(nueva);
+
+    if (!cumpleReglas) {
+      alert("La nueva contraseña no cumple con los requisitos.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:3000/api/recuperar-contrasena", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, nuevaPassword: nueva })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Contraseña actualizada correctamente. Iniciá sesión.");
+        window.location.href = "/html/IniciarSesion.html";
+      } else {
+        alert(data.mensaje || "No se pudo actualizar la contraseña");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error al contactar el servidor.");
+    }
+  });
+</script>
+
+
+</html>

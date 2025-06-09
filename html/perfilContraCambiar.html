@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - KeyArg</title>
+    <link rel="icon" href="../img/icono.png" type="image/png">
+    <link rel="stylesheet" href="../css/stylePerfilContraCambiar.css">
+    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <header class="navbar-top">
+    <div class="container">
+      <a href="/html/home.html" class="logo">Key Arg</a>
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+
+<div class="userkeys-container">
+  <!-- Sidebar -->
+  <aside class="userkeys-sidebar">
+    <h3>PERFIL</h3>
+    <ul>
+      <li><a class="perfil-a" href="../html/perfilUsuario.html">Datos Personales</a></li>
+      <li><a class="perfil-a" href="../html/perfilContraCambiar.html">Cambiar Constraseña</a></li>
+    </ul>
+    <h3>Órdenes</h3>
+    <ul>
+      <li class="userkeys-active"><a class="perfil-a" href="../html/perfilTusLLaves.html">Tus Llaves</a></li>
+    </ul>
+<button id="cerrar-sesion"
+        class="mt-10 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition">
+  Cerrar sesión
+</button>
+  </aside>
+
+  <div class="form-cambiar-pass">
+    <h2>Cambiar tu contraseña</h2>
+    <hr>
+
+    <label for="actual-password">Contraseña actual</label>
+    <input type="password" id="actual-password">
+
+    <label for="password">Nueva contraseña</label>
+    <input type="password" id="password" oninput="validatePassword()">
+
+    <ul class="validaciones">
+      <li id="length" class="invalid">Entre 8 y 70 caracteres</li>
+      <li id="special" class="invalid">Contiene un carácter o dígito especial</li>
+      <li id="number" class="invalid">Mínimo 1 número</li>
+      <li id="lower" class="invalid">Mínimo 1 letra minúscula</li>
+      <li id="upper" class="invalid">Mínimo 1 letra mayúscula</li>
+    </ul>
+
+    <button type="button" id="btn-cambiar-pass">Guardar</button>
+
+  </div>
+</div>
+  <footer class="footer">
+        <div class="footer-col">
+          <h1 class="logo">Key Arg</h1>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="medios-pago">
+            <img src="../img/visa.png" alt="Visa">
+            <img src="../img/ms.png" alt="MasterCard">
+            <img src="../img/mp.png" alt="Mercado Pago">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+            <li><a href="../html/home.html">Inicio</a></li>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+</body>
+<script src="../js/validarContrasena.js"></script>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+<script src="/js/navbarEventos.js"></script>
+<script>
+  const cerrarSesion = document.getElementById('cerrar-sesion');
+
+  if (cerrarSesion) {
+    cerrarSesion.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      try {
+        const res = await fetch('http://localhost:3000/api/logout', {
+          method: 'POST'
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          window.location.href = '/html/home.html';
+        } else {
+          alert('No se pudo cerrar sesión.');
+        }
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        alert('Error al cerrar sesión.');
+      }
+    });
+  }
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/sesion');
+      const data = await res.json();
+
+      if (!data.usuario) {
+        // No logueado
+        window.location.href = '/html/IniciarSesion.html';
+      } else if (data.usuario.rol !== 'comprador') {
+        // Usuario logueado pero no es comprador
+        window.location.href = '/html/home.html';
+      }
+    } catch (error) {
+      console.error('Error al validar sesión:', error);
+      window.location.href = '/html/home.html';
+    }
+  });
+</script>
+<script>
+  document.getElementById('btn-cambiar-pass').addEventListener('click', async () => {
+    const actual = document.getElementById('actual-password').value.trim();
+    const nueva = document.getElementById('password').value.trim();
+
+    // Validaciones básicas
+    if (!actual || !nueva) {
+      alert('Debes completar ambos campos');
+      return;
+    }
+
+    // Validación personalizada (puede usarse tu archivo validarContrasena.js también)
+    const cumpleReglas =
+      nueva.length >= 8 && nueva.length <= 70 &&
+      /[!@#$%^&*0-9]/.test(nueva) &&
+      /[a-z]/.test(nueva) &&
+      /[A-Z]/.test(nueva);
+
+    if (!cumpleReglas) {
+      alert('La nueva contraseña no cumple con los requisitos.');
+      return;
+    }
+
+    // Enviar solicitud al backend
+    try {
+      const res = await fetch('http://localhost:3000/api/cambiar-contrasena', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          actualPassword: actual,
+          nuevaPassword: nueva
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Contraseña actualizada exitosamente.');
+        location.href = '/html/perfilUsuario.html';
+      } else {
+        alert(data.mensaje || 'Error al cambiar contraseña');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error en la conexión al servidor');
+    }
+  });
+</script>
+
+
+</html>

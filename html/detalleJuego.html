@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>videojuego - KeyArg</title>
+    <link rel="icon" href="../img/icono.png" type="image/png">
+    <link rel="stylesheet" href="../css/styleDetalleJuego.css">
+    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:ital,wght@0,300..900;1,300..900&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar-top">
+    <div class="container">
+       <a href="/html/home.html" class="logo">Key Arg</a>
+
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+  
+      <div class="search-bar">
+        <input type="text" placeholder="Introduzca el nombre del videojuego" />
+        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+  
+      <div class="icons">
+        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navbar inferior -->
+  <nav class="navbar-bottom" id="bottomNav">
+    <ul>
+      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+    </ul>
+  </nav>
+
+<!-- Hero Section -->
+<div id="hero-juego" class="relative bg-cover bg-center h-auto py-16 px-4" style="background-image: url('../img/placeholder.jpg');">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative max-w-6xl mx-auto text-white">
+    <h1 id="titulo-juego" class="text-4xl font-bold mb-4">Nombre del juego</h1>
+
+    <div class="bg-white text-black p-4 rounded-lg w-full max-w-xs mb-6">
+      <div id="precio-juego" class="text-2xl font-bold mb-3">$0000</div>
+      <select id="plataforma-selector" class="text-sm text-gray-800 border rounded px-2 py-1 mb-4 w-full max-w-xs">
+      <!-- plataformas se cargarán con JS -->
+     </select>
+      <button id="btn-agregar-carrito" class="bg-blue-800 text-white px-4 py-2 rounded font-semibold hover:bg-blue-900 transition">
+       Aregar al carrito
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <!-- Info -->
+  <div class="mb-8 space-y-1">
+    <p><span class="font-semibold">Fecha de lanzamiento:</span> 26 de octubre de 2018</p>
+    <p><span class="font-semibold">Plataformas:</span> PC, PS4, Xbox One</p>
+    <div class="text-yellow-400 text-xl">★★★★★</div>
+    <p><span class="font-semibold">Reseñas de usuarios:</span> Muy positivas</p>
+  </div>
+
+  <!-- Descripción -->
+<section class="bg-white px-4 py-12 max-w-6xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-4">Descripción</h2>
+  <div id="descripcion-juego" class="space-y-4 text-justify text-sm text-gray-700">
+    <!-- Se llenará con párrafos dinámicamente -->
+  </div>
+</section>
+
+  <!-- Carrusel -->
+<div class="relative mt-4" id="carrusel-container">
+  <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 z-10">❮</button>
+  <div id="carrusel" class="flex overflow-hidden relative w-full h-24"></div>
+  <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 z-10">❯</button>
+</div>
+ 
+
+  <!-- Juegos similares -->
+  <div class="mt-12">
+    <h2 class="text-2xl font-semibold mb-4">Juegos similares</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <img src="../img/assasins.jpg" alt="Assassin's Creed Shadows" class="w-full h-40 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base font-semibold">Assassin’s Creed Shadows</h3>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <img src="../img/assasins.jpg" alt="Assassin's Creed Shadows" class="w-full h-40 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base font-semibold">Assassin’s Creed Shadows</h3>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <img src="../img/assasins.jpg" alt="Assassin's Creed Shadows" class="w-full h-40 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base font-semibold">Assassin’s Creed Shadows</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer class="footer">
+        <div class="footer-col">
+          <a href="/html/home.html" class="logo">Key Arg</a>
+          <p>Tu tienda de claves digitales en Argentina</p>
+          <div class="flex items-center gap-2 mt-2">
+            <img src="../img/visa.png" alt="Visa" class="w-[50px] bg-white rounded p-1 shadow-md">
+            <img src="../img/ms.png" alt="MasterCard" class="w-[50px] bg-white rounded p-1 shadow-md">
+            <img src="../img/mp.png" alt="Mercado Pago" class="w-[50px] bg-white rounded p-1 shadow-md">
+          </div>
+        </div>
+      
+        <div class="footer-col">
+          <h3>Menú</h3>
+          <ul>
+            <li><a href="../html/home.html">Inicio</a></li>
+            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
+            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
+            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+          </ul>
+        </div>
+      
+        <div class="footer-col">
+          <p>Proyecto Académico</p>
+          <strong>Laboratorio III - Diseño 1</strong>
+          <div class="logo-uni">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+          </div>
+        </div>
+      </footer>
+<script src="..//js/detallejuego.js"></script>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.navbar-bottom ul');
+
+  menuToggle.addEventListener('click', () => {
+    bottomNav.classList.toggle('active');
+  });
+</script>
+<script src="/js/navbarEventos.js"></script>
+<script src="../utils/utilsCarrito.js"></script>
+<script src="../js/carrito.js"></script>
+<script src="../js/detalleJuego.js"></script>
+</body>
+
+</html>

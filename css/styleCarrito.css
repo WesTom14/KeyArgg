@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:ital,wght@0,300..900;1,300..900&family=UnifrakturMaguntia&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: rubik;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+  }
+
+
+ /* NAVBAR SUPERIOR */
+.navbar-top {
+      background-color: #022b3a;
+      padding: 10px 0;
+      color: white;
+      /*Menu Superior Estatico*/
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-top .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: "Pirata One", system-ui;
+      font-size: 40px;
+      color: #00d4ff;
+      margin: 0;
+      text-decoration: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      color: white;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .search-bar input {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      width: 280px;
+      max-width: 100%;
+    }
+
+    .search-bar button {
+      padding: 6px 10px;
+      border: none;
+      background-color: #38bdf8;
+      color: white;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+    .search-bar button:hover {
+      background-color: #0ea5e9;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .icons .icon {
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* NAVBAR INFERIOR */
+    .navbar-bottom {
+      background-color: #03506f;
+      /*Menu inferior Estatico*/
+      position: sticky;
+      top: 69px; /* Altura aprox. del navbar superior */
+      z-index: 90;
+    }
+
+    .navbar-bottom ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .navbar-bottom a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .navbar-bottom a:hover {
+      color: #aefeff;
+    }
+
+    .navbar-bottom a.oferta {
+      color: orange;
+    }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar-top .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-bar input {
+    width: calc(100% - 50px);
+  }
+
+  .icons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .navbar-bottom ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
+
+.cart-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cart-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.cart-summary {
+  background-color: #003b4c;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 250px;
+  height: fit-content;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  background-color: #003b4c;
+  color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.game-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.game-details h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.platform {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.game-actions {
+  margin-left: auto;
+  text-align: right;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.quantity-delete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+}
+
+.recommendations {
+  margin-top: 1rem;
+}
+
+.recommendation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.recommendation img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+}
+
+.actions {
+  text-align: right;
+  font-size: 13px;
+}
+
+.actions a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.summary-prices p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.total span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.pay-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  background-color: #00b7ff;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Footer */
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+    background-color: #022c3c;
+    color: #fff;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .footer-col {
+    flex: 1 1 300px;
+    margin: 10px 20px;
+  }
+  
+  .footer-col .logo {
+    font-family: "Pirata One", system-ui;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #00bcd4;
+  }
+  
+  .footer-col p,
+  .footer-col strong {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .footer-col h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-col ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .medios-pago img{
+    width: 50px;
+    margin-right: 8px;
+    vertical-align: middle;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .logo-uni img {
+    width: 60px;
+  }
+
+  @media (max-width: 768px) {
+  .navbar-bottom ul {
+    display: none;
+    flex-direction: column;
+    background-color: #03506f;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .navbar-bottom ul.active {
+    display: flex;
+  }
+}

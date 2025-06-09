@@ -1,0 +1,635 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:ital,wght@0,300..900;1,300..900&family=UnifrakturMaguntia&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: rubik;
+    background-image: url(../img/bann.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+  }
+
+
+ /* NAVBAR SUPERIOR */
+.navbar-top {
+      background-color: #022b3a;
+      padding: 10px 0;
+      color: white;
+      /*Menu Superior Estatico*/
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-top .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: "Pirata One", system-ui;
+      font-size: 40px;
+      color: #00d4ff;
+      margin: 0;
+      text-decoration: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      color: white;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .search-bar input {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      width: 280px;
+      max-width: 100%;
+    }
+
+    .search-bar button {
+      padding: 6px 10px;
+      border: none;
+      background-color: #38bdf8;
+      color: white;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+    .search-bar button:hover {
+      background-color: #0ea5e9;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .icons .icon {
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* NAVBAR INFERIOR */
+    .navbar-bottom {
+      background-color: #03506f;
+      /*Menu inferior Estatico*/
+      position: sticky;
+      top: 69px; /* Altura aprox. del navbar superior */
+      z-index: 90;
+    }
+
+    .navbar-bottom ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .navbar-bottom a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .navbar-bottom a:hover {
+      color: #aefeff;
+    }
+
+    .navbar-bottom a.oferta {
+      color: orange;
+    }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar-top .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-bar input {
+    width: calc(100% - 50px);
+  }
+
+  .icons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .navbar-bottom ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
+
+/* Sección de Tendencias */
+
+  .tendencias {
+    background-image: url(./img/bann.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #002933;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    padding: 30px 20px;
+    color: white;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .tendencias h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .tendencias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /*cards-juegos en tendencias*/
+ .juego {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-color: black;
+}
+
+.juego:hover {
+  transform: scale(1.03);
+}
+
+.juego img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.juego p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+}
+  nav a {
+    margin: 0 0.5rem;
+    color: white;
+    text-decoration: none;
+  }
+  
+  section {
+    padding: 2rem;
+  }
+  
+  .tendencias .slider {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .card {
+    background-color: #1a2b35;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+/*Precios*/
+.precio {
+  font-weight: bold;
+  color: #1b9e3d;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+.info-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 10px;
+}
+
+.info-linea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.precio {
+  font-size: 14px;
+  font-weight: bold;
+  color: #dd7230;
+  margin: 0;
+  white-space: nowrap;
+}
+
+
+/*Etiqueta*/
+.etiqueta-precio {
+  background-color:  #ff7a00; /* naranja intenso */
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/*Secciones y Grid*/
+
+  .seccion-juegos {
+    padding: 40px 20px;
+    background-color: #fff;
+    color: #1a1a1a;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .seccion-juegos h2 {
+    text-align: left;
+    font-size: 22px;
+    margin-bottom: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .seccion-juegos-grid {
+ display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  }
+ 
+/* Cards juegos */  
+ .card-juego {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-color: black;
+  width: 100%;
+  max-width: 400px;
+}
+
+.card-juego:hover {
+  transform: scale(1.03);
+}
+
+.card-juego img {
+  width: 100%;
+  height: 200px; /* Más baja que la grande */
+  object-fit: cover;
+  display: block;
+}
+
+.card-juego > p:not(.titulo):not(.precio) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0;
+}
+
+  
+  /* Sección de Beneficios */
+  
+  .beneficios {
+    display: flex;
+    justify-content: space-around;
+    background-color: #002933;
+    color: white;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+    gap: 30px;
+    text-align: left;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .beneficio {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 280px;
+  }
+  
+  .beneficio img {
+    width: 50px;
+    height: 50px;
+    filter: brightness(0) saturate(100%) invert(47%) sepia(94%) saturate(2676%) hue-rotate(168deg) brightness(101%) contrast(105%);
+  }
+  
+  .beneficio h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  
+  .beneficio p {
+    font-size: 14px;
+    margin: 0;
+    color: #d1d5db;
+  }
+
+
+ 
+  
+
+  /* Sección de Ofertas */
+.ofertas {
+    background-color: #032B3F;
+    color: white;
+    padding: 2rem;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .ofertas-contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px; 
+    margin: 0 auto;   
+  }
+  
+  .ofertas-texto {
+    max-width: 400px;
+  }
+  
+  .ofertas-texto h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #4DBDDE;
+  }
+  
+  .ofertas-texto p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  .ofertas-contador {
+    background-color: #06475F;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bloque-tiempo {
+    text-align: center;
+    color: #00C8FF;
+  }
+  
+  .bloque-tiempo span {
+    font-size: 2.5rem;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .bloque-tiempo p {
+    margin: 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+  
+  .separador {
+    font-size: 2.5rem;
+    color: #00C8FF;
+    font-weight: bold;
+  }
+  
+  .ofertas-juegos {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+
+  
+  .etiqueta-descuento {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #FFC107; 
+  color: #000; 
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 12px; 
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  transform: rotate(-10deg); 
+}
+  
+  
+ 
+  /* Responsive */
+  @media (max-width: 768px) {
+    .ofertas-contenedor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .ofertas-contador {
+      margin-top: 1rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+
+  }
+
+  
+  .texto-superpuesto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* Footer */
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+    background-color: #022c3c;
+    color: #fff;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .footer-col {
+    flex: 1 1 300px;
+    margin: 10px 20px;
+  }
+  
+  .footer-col .logo {
+    font-family: "Pirata One", system-ui;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #00bcd4;
+  }
+  
+  .footer-col p,
+  .footer-col strong {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .footer-col h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-col ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .medios-pago img{
+    width: 50px;
+    margin-right: 8px;
+    vertical-align: middle;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .logo-uni img {
+    width: 60px;
+  }
+
+  @media (max-width: 768px) {
+  .navbar-bottom ul {
+    display: none;
+    flex-direction: column;
+    background-color: #03506f;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .navbar-bottom ul.active {
+    display: flex;
+  }
+}
+  
