@@ -47,11 +47,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <div class="text-right">
           <p class="font-bold text-sm text-black">$${juego.precio}</p>
+          <button class="text-red-600 text-sm hover:underline eliminar-juego" data-id="${juego.id}">
+            Eliminar
+          </button>
         </div>
       `;
 
       contenedorCarrito.appendChild(div);
-    });
+    }
+  );
 
     totalElemento.textContent = `$${total}`;
 
@@ -115,5 +119,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     console.error('Error al cargar recomendaciones:', err);
   }
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('eliminar-juego')) {
+    const id = e.target.getAttribute('data-id');
+
+    fetch(`/carrito/eliminar/${id}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    })
+    .then(res => {
+      if (res.ok) {
+        window.location.reload(); // recarga el carrito
+      } else {
+        return res.json().then(data => {
+          alert(data.mensaje || 'No se pudo eliminar.');
+        });
+      }
+    })
+    .catch(err => {
+      console.error('Error al eliminar juego:', err);
+    });
+  }
+});
+
 });
 
