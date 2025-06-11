@@ -13,11 +13,9 @@
     <aside class="w-64 bg-gray-900 text-white flex flex-col p-6">
       <h1 class="text-3xl logo-font text-cyan-400 mb-10 text-center">KeyArg Admin</h1>
       <nav class="flex flex-col gap-4">
-        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Dashboard</a>
-        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Agregar Clave</a>
-        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Ver Claves</a>
-        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Pedidos</a>
-        <a href="#" class="hover:bg-gray-700 rounded px-4 py-2 transition">Usuarios</a>
+        <a href="" class="hover:bg-gray-700 rounded px-4 py-2 transition">Dashboard</a>
+        <a href="../Administrador/AdminKeys.html" class="hover:bg-gray-700 rounded px-4 py-2 transition">Keys</a>
+        <a href="../Administrador/EditarUsuario.html" class="hover:bg-gray-700 rounded px-4 py-2 transition">Usuarios</a>
       </nav>
       <br>
       <br>
@@ -33,44 +31,50 @@
 
     
     <main class="flex-1 p-8">
+      
       <h2 class="text-2xl font-semibold mb-6 text-gray-800">Panel de Control</h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
 
         <div class="bg-white rounded-lg shadow p-6 border-l-4 border-cyan-400">
           <h3 class="text-lg font-semibold text-gray-800 mb-2">Total de Claves Activas</h3>
-          <p class="text-2xl font-bold text-gray-700">124</p>
+          <p id="total-compras" class="text-2xl font-bold text-gray-700">...</p>
         </div>
+        
 
-        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-400">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">Stock Bajo</h3>
-          <p class="text-gray-700">7 claves con menos de 3 unidades</p>
-        </div>
+        
 
         <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-400">
           <h3 class="text-lg font-semibold text-gray-800 mb-2">Últimas Ventas</h3>
-          <p class="text-gray-700">GTA V (Steam) vendido hace 3 min</p>
+          <p id="ultima-venta" class="text-gray-700">...</p>
         </div>
         
       </div>
+
+      <section class="mt-10">
+  <h2 class="text-xl font-bold mb-4">Ultimos Usuarios Registrados</h2>
+  <div id="usuarios-lista" class="grid gap-4"></div>
+</section>
+
     </main>
     
   </div>
 </body>
+
 <script>
+
+
+
   const cerrarSesion = document.getElementById('cerrar-sesion');
 
   if (cerrarSesion) {
     cerrarSesion.addEventListener('click', async (e) => {
       e.preventDefault();
-
       try {
         const res = await fetch('http://localhost:3000/api/logout', {
           method: 'POST'
         });
-
         const data = await res.json();
-
         if (res.ok) {
           window.location.href = '/html/home.html';
         } else {
@@ -82,23 +86,46 @@
       }
     });
   }
-</script>
-<script>
   document.addEventListener('DOMContentLoaded', async () => {
     try {
+      // Validar sesión
       const res = await fetch('http://localhost:3000/api/sesion');
       const data = await res.json();
-
-      if (!data.usuario) {
-        window.location.href = '/html/IniciarSesion.html';
-      } else if (data.usuario.rol !== 'admin') {
+      if (!data.usuario || data.usuario.rol !== 'admin') {
         window.location.href = '/html/home.html';
+        return;
       }
-    } catch (error) {
-      console.error('Error al validar sesión:', error);
-      window.location.href = '/html/home.html';
+
+      const dashRes = await fetch('http://localhost:3000/api/info-dashboard');
+const dashData = await dashRes.json();
+document.getElementById('ultima-venta').textContent = `Última venta: ${dashData.ultimaVenta}`;
+
+
+      // Cargar estadísticas
+      const estadisticasRes = await fetch('http://localhost:3000/api/estadisticas');
+      const estadisticasData = await estadisticasRes.json();
+      document.getElementById('total-compras').textContent = estadisticasData.totalCompras;
+
+      // Cargar usuarios
+      const usuariosRes = await fetch('http://localhost:3000/api/usuarios');
+      const usuarios = await usuariosRes.json();
+      const contenedor = document.getElementById('usuarios-lista');
+      usuarios.forEach(u => {
+        const div = document.createElement('div');
+        div.className = 'p-4 bg-white rounded shadow';
+        div.innerHTML = `
+          <p><strong>${u.nombreUsuario}</strong> (${u.usuario})</p>
+          <p>Provincia: ${u.provincia}</p>
+          <p>Keys: ${u.keys ? u.keys.length : 0}</p>
+        `;
+        contenedor.appendChild(div);
+      });
+
+    } catch (err) {
+      console.error('Error al cargar datos del admin panel:', err);
     }
   });
 </script>
+
 
 </html>
