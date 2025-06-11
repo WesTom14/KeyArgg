@@ -9,7 +9,7 @@ const usuariosPath = path.join(__dirname, 'usuarios.json');
 const nodemailer = require('nodemailer');
 //utils
 const calcularPrecio = require('./utils/calcularPrecio');
-const generarClaveJuego = require('./utils/generarClave');
+const asignarKeysAUsuario = require('./utils/asignarKeys');
 
 const app = express();
 const PORT = 3000;
@@ -359,6 +359,15 @@ app.get('/carrito', (req, res) => {
   res.json({ carrito: req.session.carrito || [] });
 });
 
+app.post('/api/test-generar-keys', (req, res) => {
+  if (!req.session.usuario || req.session.usuario.rol !== 'comprador') {
+    return res.status(401).json({ mensaje: 'No autorizado' });
+  }
+
+  asignarKeysAUsuario(req);
+
+  res.json({ mensaje: 'Keys generadas correctamente', usuario: req.session.usuario.usuario });
+});
 
 
 
