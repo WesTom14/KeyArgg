@@ -11,3 +11,5 @@ function calcularPrecio(juego) {
 
   return Math.max(1500, base);
 }
+
+module.exports = calcularPrecio;
