@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  let carrito = [];
+
+  // 🔁 Obtener carrito desde el servidor (sesión)
+  try {
+    const res = await fetch('/carrito', { credentials: 'include' });
+    if (res.status === 401) {
+      document.getElementById('carrito-vacio').textContent = 'Inicia sesión para ver tu carrito.';
+      return;
+    }
+    const data = await res.json();
+    carrito = data.carrito;
+  } catch (err) {
+    console.error('Error al obtener el carrito:', err);
+    return;
+  }
+
   const contenedorCarrito = document.getElementById('items-carrito');
   const totalElemento = document.getElementById('total-carrito');
   const vacioMsg = document.getElementById('carrito-vacio');
@@ -8,7 +23,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (carrito.length === 0) {
     vacioMsg.classList.remove('hidden');
     totalElemento.textContent = '$0';
-
   } else {
     vacioMsg.classList.add('hidden');
     let total = 0;
@@ -19,7 +33,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const div = document.createElement('div');
       div.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
 
-      // Si no tiene plataformas, agregamos una por defecto
       const plataformas = juego.plataformas || ['PC (Steam)'];
 
       div.innerHTML = `
@@ -34,7 +47,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <div class="text-right">
           <p class="font-bold text-sm text-black">$${juego.precio}</p>
-          <button class="text-red-600 text-sm hover:underline eliminar-item" data-id="${juego.id}">Eliminar</button>
         </div>
       `;
 
@@ -45,27 +57,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Calcular resumen
     const precioOficial = total;
-    const descuento = Math.round(precioOficial * 0.3); //probando un descuento del 0.30%
+    const descuento = Math.round(precioOficial * 0.3); // Descuento 30%
     const subtotal = precioOficial - descuento;
 
     document.getElementById('precio-oficial').textContent = `$${precioOficial}`;
     document.getElementById('descuento').textContent = `-$${descuento}`;
     document.getElementById('total-carrito').textContent = `$${subtotal}`;
-
   }
 
-  // 2. Escuchar clics en "Eliminar"
-  document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('eliminar-item')) {
-      const id = e.target.dataset.id;
-      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-      carrito = carrito.filter(j => j.id != id);
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-      location.reload();
-    }
-  });
-
-  // 3. Cargar recomendaciones
+  // 2. Cargar recomendaciones
   const contenedorRecomendaciones = document.getElementById('recomendaciones-carrito');
 
   try {
@@ -100,23 +100,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       div.innerHTML = estructuraHTML;
       contenedorRecomendaciones.appendChild(div);
 
-        // Botón funcional
-        const boton = div.querySelector('.agregar-carrito');
-    boton.addEventListener('click', (e) => {
-  e.preventDefault();
-  agregarAlCarrito({
-    id: juego.id,
-    name: juego.name,
-    precio: juego.precio,
-    imagen: juego.background_image,
-    plataformas: plataformas
-  });
-
-  //  Recargar la página
-  window.location.reload();
-});
- });
-    } catch (err) {
-        console.error('Error al cargar recomendaciones:', err);
-    }
+      const boton = div.querySelector('.agregar-carrito');
+      boton.addEventListener('click', (e) => {
+        e.preventDefault();
+        agregarAlCarrito({
+          id: juego.id,
+          name: juego.name,
+          precio: juego.precio,
+          imagen: juego.background_image,
+          plataformas: plataformas
+        });
+      });
     });
+  } catch (err) {
+    console.error('Error al cargar recomendaciones:', err);
+  }
+});
+

@@ -23,7 +23,7 @@
       </div>
   
       <div class="icons">
-        <a class="icon" title="Carrito de compras" href="../html/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a class="icon" title="Carrito de compras" href="#" id="icono-carrito"><i class="fa-solid fa-cart-shopping"> </i></a>
         <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
       </div>
     </div>
@@ -231,12 +231,20 @@
     bottomNav.classList.toggle('active');
   });
 </script>
-
+<script type="module">
+  import { redirigirSiAdmin } from "../js/verificarRol.js";
+  redirigirSiAdmin();
+</script>
 <script src="/js/cargarSecciones.js"></script>
 <script src="../js/detalleJuego.js"></script>
 <script src="../js/perfil-Usuario.js"></script>
 <script src="/js/navbarEventos.js"></script>
 <script src="../utils/utilsCarrito.js"></script>
 <script src="/js/carrito.js"></script>
+<script src="../js/verificarCarrito.js"></script>
+<script>
+  protegerIconoCarrito();
+</script>
+
 </body>
 </html>

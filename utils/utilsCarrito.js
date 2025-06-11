@@ -1,28 +1,65 @@
 function agregarAlCarrito(juego) {
-  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-  if (!carrito.find(item => item.id === juego.id)) {
-    carrito.push({
-      id: juego.id,
-      name: juego.name,
-      precio: juego.precio,
-      imagen: juego.imagen || juego.background_image,
-      plataformas: juego.plataformas || ["PC (Steam)"] // si no vienen, al menos una por defecto
-    });
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    alert(`${juego.name} fue agregado al carrito`);
-  } else {
-    alert(`${juego.name} ya está en el carrito`);
-  }
+  fetch('/carrito/agregar', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(juego),
+    credentials: 'include'
+  })
+  .then(res => {
+    if (res.status === 401) {
+      alert("Debes iniciar sesión para agregar al carrito.");
+      window.location.href = 'IniciarSesion.html';
+      return;
+    }
+    if (res.status === 403) {
+      alert("Solo los usuarios compradores pueden usar el carrito.");
+      return;
+    }
+    return res.json();
+  })
+  .then(data => {
+    if (data) {
+      alert(data.mensaje);
+      window.location.href = "../html/carrito.html"; // ✅ Redirigir solo si todo salió bien
+    }
+  })
+  .catch(err => {
+    console.error("Error al agregar al carrito:", err);
+  });
 }
 
-// Función de utilidad por si necesitás eliminar uno (puede agregarse)
+// Eliminar juego del carrito por ID (requiere estar logueado)
 function eliminarDelCarrito(id) {
-  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-  carrito = carrito.filter(item => item.id != id);
-  localStorage.setItem('carrito', JSON.stringify(carrito));
+  fetch(`/carrito/eliminar/${id}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  })
+  .then(res => {
+    if (res.status === 401) {
+      alert("Debes iniciar sesión.");
+      window.location.href = '/login';
+      return;
+    }
+    if (res.status === 403) {
+      alert("Solo compradores pueden modificar el carrito.");
+      return;
+    }
+    return res.json();
+  })
+  .then(data => {
+    if (data) {
+      alert(data.mensaje);
+      window.location.reload();
+    }
+  })
+  .catch(err => {
+    console.error("Error al eliminar del carrito:", err);
+  });
 }
 
 // Exponerlas globalmente
 window.agregarAlCarrito = agregarAlCarrito;
 window.eliminarDelCarrito = eliminarDelCarrito;
+

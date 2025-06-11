@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btn = document.getElementById('btn-agregar-carrito');
     btn.addEventListener('click', () => {
       const seleccion = selector.value;
-
+      
       agregarAlCarrito({
         id: juego.id,
         name: juego.name,
@@ -45,8 +45,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         plataformas: plataformas,
         seleccion: seleccion
       });
-
-      window.location.href = "../html/carrito.html";
     });
 
   } catch (err) {

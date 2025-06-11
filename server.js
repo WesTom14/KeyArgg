@@ -23,6 +23,13 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+function verificarSesion(req, res, next) {
+  if (!req.session.usuario) {
+    return res.status(401).json({ mensaje: 'Debes iniciar sesión para continuar.' });
+  }
+  next();
+}
+
 
 app.get('/api/sesion', (req, res) => {
   if (req.session.usuario) {
@@ -292,6 +299,64 @@ app.use(express.static(path.join(__dirname)));
 // Ruta para devolver home.html en la raíz
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'home.html'));
+});
+
+app.post('/carrito/agregar', (req, res) => {
+  const user = req.session.usuario;
+
+  if (!user) {
+    return res.status(401).json({ mensaje: 'Debes iniciar sesión para agregar al carrito.' });
+  }
+
+  if (user.rol !== 'comprador') {
+    return res.status(403).json({ mensaje: 'Solo compradores pueden usar el carrito.' });
+  }
+
+  const juego = req.body;
+
+  if (!req.session.carrito) {
+    req.session.carrito = [];
+  }
+
+  req.session.carrito.push(juego);
+
+  res.json({ mensaje: 'Juego añadido al carrito.' });
+});
+
+app.delete('/carrito/eliminar/:id', (req, res) => {
+  const user = req.session.usuario;
+
+  if (!user) {
+    return res.status(401).json({ mensaje: 'Debes iniciar sesión.' });
+  }
+
+  if (user.rol !== 'comprador') {
+    return res.status(403).json({ mensaje: 'Solo compradores pueden modificar el carrito.' });
+  }
+
+  const juegoId = req.params.id;
+
+  if (!req.session.carrito) {
+    return res.status(400).json({ mensaje: 'El carrito está vacío.' });
+  }
+
+  req.session.carrito = req.session.carrito.filter(j => j.id != juegoId);
+
+  res.json({ mensaje: 'Juego eliminado del carrito.' });
+});
+
+app.get('/carrito', (req, res) => {
+  const user = req.session.usuario;
+
+  if (!user) {
+    return res.status(401).json({ mensaje: 'Debes iniciar sesión.' });
+  }
+
+  if (user.rol !== 'comprador') {
+    return res.status(403).json({ mensaje: 'Solo los usuarios compradores pueden ver el carrito.' });
+  }
+
+  res.json({ carrito: req.session.carrito || [] });
 });
 
 
