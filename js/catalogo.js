@@ -12,11 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const urlParams = new URLSearchParams(window.location.search);
   const searchParam = urlParams.get("search");
-
+  const genreParam = urlParams.get("categoria");
   //guardo busquedas desde fuera de catalago.html
   if (searchParam) {
     currentFiltros.search = searchParam;
   }
+if (genreParam) {
+  currentFiltros.genre = genreParam;
+}
+
 
   // mapeos de nombre plataforma
   function obtenerNombrePlataforma(id) {

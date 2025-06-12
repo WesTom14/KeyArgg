@@ -184,31 +184,31 @@
 
     <!-- Carrusel -->
     <div id="carrusel-categorias">
-      <a href="/html/catalogo.html?categoria=mundo-abierto" class="card-juego-categoria">
-        <img src="../img/gtav.jpg" alt="Accion">
-        <div class="texto-superpuesto">Acción</div>
-      </a>
-      <a href="/html/catalogo.html?categoria=aventura" class="card-juego-categoria">
-        <img src="../img/assasins.jpg" alt="Aventura">
-        <div class="texto-superpuesto">Aventura</div>
-      </a>
-      <a href="/html/catalogo.html?categoria=estrategia" class="card-juego-categoria">
-        <img src="../img/OR_LargeCard_AvailableNow.png" alt="RPG">
-        <div class="texto-superpuesto">RPG</div>
-      </a>
-      <a href="/html/catalogo.html?categoria=deportes" class="card-juego-categoria">
-        <img src="../img/2CODMW2.avif" alt="Shooter">
-        <div class="texto-superpuesto">Shooter</div>
-      </a>
-      <a href="/html/catalogo.html?categoria=fps" class="card-juego-categoria">
-        <img src="../img/fifa-generic-featured-tile-16x9.png.adapt.crop191x100.1200w.png" alt="deportes">
-        <div class="texto-superpuesto">Deportes</div>
-      </a>
-      <a href="/html/catalogo.html?categoria=fps" class="card-juego-categoria">
-        <img src="../img/1366_2000.jpg" alt="carreras">
-        <div class="texto-superpuesto">Carreras</div>
-      </a>
-    </div>
+  <div class="card-juego-categoria" data-categoria="Acción">
+    <img src="../img/gtav.jpg" alt="Acción">
+    <div class="texto-superpuesto">Acción</div>
+  </div>
+  <div class="card-juego-categoria" data-categoria="Aventura">
+    <img src="../img/assasins.jpg" alt="Aventura">
+    <div class="texto-superpuesto">Aventura</div>
+  </div>
+  <div class="card-juego-categoria" data-categoria="RPG">
+    <img src="../img/OR_LargeCard_AvailableNow.png" alt="RPG">
+    <div class="texto-superpuesto">RPG</div>
+  </div>
+  <div class="card-juego-categoria" data-categoria="Shooter">
+    <img src="../img/2CODMW2.avif" alt="Shooter">
+    <div class="texto-superpuesto">Shooter</div>
+  </div>
+  <div class="card-juego-categoria" data-categoria="Deportes">
+    <img src="../img/fifa-generic-featured-tile.png" alt="Deportes">
+    <div class="texto-superpuesto">Deportes</div>
+  </div>
+  <div class="card-juego-categoria" data-categoria="Carreras">
+    <img src="../img/1366_2000.jpg" alt="Carreras">
+    <div class="texto-superpuesto">Carreras</div>
+  </div>
+</div>
 
     <!-- Botón Derecho -->
     <button id="btn-next-cat" class="carrusel-btn right">›</button>
@@ -321,7 +321,30 @@ function ajustarLoop() {
   }, 300); // esperar que termine scroll smooth
 }
 </script>
->
+<script>
+document.querySelectorAll(".card-juego-categoria").forEach(card => {
+  card.addEventListener("click", () => {
+    const categoria = card.dataset.categoria;
+
+    const mapa = {
+      "Acción": "action",
+      "Aventura": "adventure",
+      "RPG": "role-playing-games-rpg",
+      "Shooter": "shooter",
+      "Deportes": "sports",
+      "Carreras": "racing"
+    };
+
+    const slug = mapa[categoria];
+    if (slug) {
+      window.location.href = `/html/catalogo.html?categoria=${slug}`;
+    } else {
+      console.warn("Categoría no reconocida:", categoria);
+    }
+  });
+});
+</script>
+
 
 
 </body>
