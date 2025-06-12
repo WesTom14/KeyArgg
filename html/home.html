@@ -144,12 +144,10 @@
 
   <div class="ofertas-contador">
     <div class="bloque-tiempo"><span id="dias">00</span><p>Días</p></div>
-    <div class="separador">:</div>
     <div class="bloque-tiempo"><span id="horas">00</span><p>Horas</p></div>
-    <div class="separador">:</div>
     <div class="bloque-tiempo"><span id="minutos">00</span><p>Minutos</p></div>
+    <div class="bloque-tiempo"><span id="segundos">00</span><p>Segundos</p></div>
   </div>
-</div>
           
         </div>
       
@@ -173,24 +171,46 @@
       </section>
       
       
+<section id="categorias" class="seccion-juegos">
+  <h2>Explorar por categorías</h2>
 
-      <section id="categorias" class="seccion-juegos">
-        <h2>Explorar por categorías</h2>
-        <div class="seccion-juegos-grid">
-          <div class="card-juego">
-            <img src="../img/gtav.jpg" alt="RPG">
-            <div class="texto-superpuesto">Mundo Abierto</div> 
-          </div>
-          <div class="card-juego">
-            <img src="../img/assasins.jpg" alt="FPS">
-            <div class="texto-superpuesto">Aventura</div>
-          </div>
-          <div class="card-juego">
-            <img src="../img/balatro.jpg" alt="Deportes">
-            <div class="texto-superpuesto">Estrategia</div>
-          </div>
-        </div>
-      </section>
+  <div class="carrusel-categorias-container">
+    <!-- Botón Izquierdo -->
+    <button id="btn-prev-cat" class="carrusel-btn left">‹</button>
+
+    <!-- Carrusel -->
+    <div id="carrusel-categorias">
+      <a href="/html/catalogo.html?categoria=mundo-abierto" class="card-juego-categoria">
+        <img src="../img/gtav.jpg" alt="Accion">
+        <div class="texto-superpuesto">Acción</div>
+      </a>
+      <a href="/html/catalogo.html?categoria=aventura" class="card-juego-categoria">
+        <img src="../img/assasins.jpg" alt="Aventura">
+        <div class="texto-superpuesto">Aventura</div>
+      </a>
+      <a href="/html/catalogo.html?categoria=estrategia" class="card-juego-categoria">
+        <img src="../img/OR_LargeCard_AvailableNow.png" alt="RPG">
+        <div class="texto-superpuesto">RPG</div>
+      </a>
+      <a href="/html/catalogo.html?categoria=deportes" class="card-juego-categoria">
+        <img src="../img/2CODMW2.avif" alt="Shooter">
+        <div class="texto-superpuesto">Shooter</div>
+      </a>
+      <a href="/html/catalogo.html?categoria=fps" class="card-juego-categoria">
+        <img src="../img/fifa-generic-featured-tile-16x9.png.adapt.crop191x100.1200w.png" alt="deportes">
+        <div class="texto-superpuesto">Deportes</div>
+      </a>
+      <a href="/html/catalogo.html?categoria=fps" class="card-juego-categoria">
+        <img src="../img/1366_2000.jpg" alt="carreras">
+        <div class="texto-superpuesto">Carreras</div>
+      </a>
+    </div>
+
+    <!-- Botón Derecho -->
+    <button id="btn-next-cat" class="carrusel-btn right">›</button>
+  </div>
+</section>
+
       
       <footer class="footer">
         <div class="footer-col">
@@ -245,6 +265,60 @@
 <script>
   protegerIconoCarrito();
 </script>
+<script src="/js/scriptTiempo.js"></script>
+<script>
+  iniciarContador();
+</script>
+<script>
+const carrusel = document.getElementById('carrusel-categorias');
+const cards = carrusel.querySelectorAll('.card-juego-categoria');
+const prevBtn = document.getElementById('btn-prev-cat');
+const nextBtn = document.getElementById('btn-next-cat');
+
+const cardWidth = 300 + 30; // ancho + gap
+const visibleCards = 3;
+
+// Paso 1: Clonar cards para loop
+for (let i = 0; i < visibleCards; i++) {
+  const cloneStart = cards[i].cloneNode(true);
+  const cloneEnd = cards[cards.length - 1 - i].cloneNode(true);
+  carrusel.appendChild(cloneStart);
+  carrusel.insertBefore(cloneEnd, carrusel.firstChild);
+}
+
+// Paso 2: Ir a la primera card "real"
+let index = visibleCards;
+carrusel.scrollLeft = index * cardWidth;
+
+// Paso 3: Movimiento con botones
+prevBtn.addEventListener('click', () => {
+  index--;
+  carrusel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+  ajustarLoop();
+});
+
+nextBtn.addEventListener('click', () => {
+  index++;
+  carrusel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+  ajustarLoop();
+});
+
+// Paso 4: Corregir visual cuando llega a los clones
+function ajustarLoop() {
+  setTimeout(() => {
+    const totalCards = carrusel.querySelectorAll('.card-juego-categoria').length;
+    if (index < visibleCards) {
+      index = totalCards - (visibleCards * 2);
+      carrusel.scrollLeft = index * cardWidth;
+    } else if (index >= totalCards - visibleCards) {
+      index = visibleCards;
+      carrusel.scrollLeft = index * cardWidth;
+    }
+  }, 300); // esperar que termine scroll smooth
+}
+</script>
+>
+
 
 </body>
 </html>

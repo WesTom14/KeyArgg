@@ -3,18 +3,11 @@
     "usuario": "cliente1@email.com",
     "password": "1234",
     "rol": "comprador",
-    "nombreCompleto": "Juan Pérez",
+    "nombreCompleto": "Juan P",
     "nombreUsuario": "juan",
     "provincia": "Mendoza",
     "fechaNacimiento": "1995-05-20",
     "keys": [
-      {
-        "juegoId": 3328,
-        "juego": "The Witcher 3: Wild Hunt",
-        "key": "YNYQ8-GQ66H-N1PYD",
-        "plataforma": "Xbox Series S/X",
-        "fecha": "2025-06-11T20:24:05.659Z"
-      },
       {
         "juegoId": 3498,
         "juego": "Grand Theft Auto V",
