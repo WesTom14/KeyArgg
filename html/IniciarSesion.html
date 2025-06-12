@@ -1,164 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IniciarSesión</title>
-    <link rel="icon" href="../img/icono.png" type="image/png">
-    <link rel="stylesheet" href="../css/styleIniciarSesion.css">
-    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <link rel="icon" href="../img/icono.png" type="image/png" />
+    <link rel="stylesheet" href="../css/styleIniciarSesion.css" />
+    <script
+      src="https://kit.fontawesome.com/3f705065cb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <header class="navbar-top">
-    <div class="container">
-      <a href="/html/home.html" class="logo">Key Arg</a>
+      <div class="container">
+        <a href="/html/home.html" class="logo">Key Arg</a>
 
-      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
-  
-      <div class="search-bar">
-        <input type="text" placeholder="Introduzca el nombre del videojuego" />
-        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+
+        <form action="/html/catalogo.html" method="GET" class="search-bar">
+          <input
+            type="text"
+            name="search"
+            id="input-busqueda-global"
+            placeholder="Buscar juegos..."
+          />
+          <button type="submit">Buscar</button>
+        </form>
+
+        <div class="icons">
+          <a class="icon" title="Carrito de compras" href="#" id="icono-carrito"
+            ><i class="fa-solid fa-cart-shopping"> </i
+          ></a>
+          <a
+            class="icon"
+            title="Perfil de usuario"
+            href="../html/perfilUsuario.html"
+            ><i class="fa-solid fa-user"> </i
+          ></a>
+        </div>
       </div>
-  
-      <div class="icons">
-        <a class="icon" title="Carrito de compras" href="#" id="icono-carrito"><i class="fa-solid fa-cart-shopping"> </i></a>
-        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
-      </div>
+    </header>
+
+    <!-- Navbar inferior -->
+    <nav class="navbar-bottom" id="bottomNav">
+      <ul>
+        <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+        <li>
+          <a href="../html/home.html#categorias" class="generos">Géneros</a>
+        </li>
+        <li>
+          <a href="../html/home.html#recomendaciones-id">Recomendaciones</a>
+        </li>
+        <li>
+          <a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="login-container">
+      <h2>Acceder</h2>
+
+      <form>
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" required />
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" required />
+
+        <div class="reset-password">
+          <span>¿Has olvidado tu contraseña?</span>
+          <a href="./contrasenaOlvidada.html">Restablecer</a>
+        </div>
+
+        <button class="login-button" type="submit">Acceder</button>
+      </form>
+
+      <p class="register-link">
+        ¿Nuevo en KeyArg? <a href="./CrearCuenta.html">Crear cuenta</a>
+      </p>
     </div>
-  </header>
-  
-  <!-- Navbar inferior -->
-  <nav class="navbar-bottom" id="bottomNav">
-    <ul>
-      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
-      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
-      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
-      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
-    </ul>
-  </nav>
-
-
-<div class="login-container">
-  <h2>Acceder</h2>
-
-  <form>
-    <label for="email">Correo electrónico</label>
-    <input type="email" id="email" required />
-
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" required />
-
-    <div class="reset-password">
-      <span>¿Has olvidado tu contraseña?</span>
-      <a href="./contrasenaOlvidada.html">Restablecer</a>
-    </div>
-
-    <button class="login-button" type="submit">Acceder</button>
-  </form>
-
-  <p class="register-link">¿Nuevo en KeyArg? <a href="./CrearCuenta.html">Crear cuenta</a></p>
-</div>
-<div class="page-container">
-   <footer class="footer">
+    <div class="page-container">
+      <footer class="footer">
         <div class="footer-col">
           <h1 class="logo">Key Arg</h1>
           <p>Tu tienda de claves digitales en Argentina</p>
           <div class="medios-pago">
-            <img src="../img/visa.png" alt="Visa">
-            <img src="../img/ms.png" alt="MasterCard">
-            <img src="../img/mp.png" alt="Mercado Pago">
+            <img src="../img/visa.png" alt="Visa" />
+            <img src="../img/ms.png" alt="MasterCard" />
+            <img src="../img/mp.png" alt="Mercado Pago" />
           </div>
         </div>
-      
+
         <div class="footer-col">
           <h3>Menú</h3>
           <ul>
             <li><a href="../html/home.html">Inicio</a></li>
             <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
-            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
-            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
-            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
+            <li>
+              <a href="../html/home.html#categorias" class="generos">Géneros</a>
+            </li>
+            <li>
+              <a href="../html/home.html#recomendaciones-id">Recomendaciones</a>
+            </li>
+            <li>
+              <a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a>
+            </li>
           </ul>
         </div>
-      
+
         <div class="footer-col">
           <p>Proyecto Académico</p>
           <strong>Laboratorio III - Diseño 1</strong>
           <div class="logo-uni">
-            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
+            <img src="../img/aconcagua1.PNG" alt="Logo Universidad" />
           </div>
         </div>
       </footer>
-</div>
-</body>
-<script>
-    const menuToggle = document.querySelector('.menu-toggle');
-  const bottomNav = document.querySelector('.navbar-bottom ul');
+    </div>
+  </body>
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const bottomNav = document.querySelector(".navbar-bottom ul");
 
-  menuToggle.addEventListener('click', () => {
-    bottomNav.classList.toggle('active');
-  });
-</script>
-<script src="/js/navbarEventos.js"></script>
-<script>
-  const form = document.querySelector('form');
+    menuToggle.addEventListener("click", () => {
+      bottomNav.classList.toggle("active");
+    });
+  </script>
+  <script src="/js/navbarEventos.js"></script>
+  <script>
+    const form = document.querySelector("form");
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // evita el comportamiento por defecto del formulario
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); // evita el comportamiento por defecto del formulario
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-    try {
-      const res = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ usuario: email, password })
-      });
+      try {
+        const res = await fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ usuario: email, password }),
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      if (res.ok) {
-        // Redireccionar según el tipo de usuario
-        if (data.usuario.rol === 'admin') {
-          window.location.href = '/html/Administrador/Admin.html';
+        if (res.ok) {
+          // Redireccionar según el tipo de usuario
+          if (data.usuario.rol === "admin") {
+            window.location.href = "/html/Administrador/Admin.html";
+          } else {
+            window.location.href = "/html/home.html";
+          }
         } else {
-          window.location.href = '/html/home.html';
+          alert(data.error || "Inicio de sesión fallido");
         }
-      } else {
-        alert(data.error || 'Inicio de sesión fallido');
+      } catch (error) {
+        console.error("Error al iniciar sesión:", error);
+        alert("Hubo un error al conectar con el servidor.");
       }
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      alert('Hubo un error al conectar con el servidor.');
-    }
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const res = await fetch('http://localhost:3000/api/sesion');
-      const data = await res.json();
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/sesion");
+        const data = await res.json();
 
-      if (data.usuario) {
-        // Ya hay sesión activa → redirigir según rol
-        if (data.usuario.rol === 'admin') {
-          window.location.href = '/html/Administrador/Admin.html';
-        } else {
-          window.location.href = '/html/perfilUsuario.html';
+        if (data.usuario) {
+          // Ya hay sesión activa → redirigir según rol
+          if (data.usuario.rol === "admin") {
+            window.location.href = "/html/Administrador/Admin.html";
+          } else {
+            window.location.href = "/html/perfilUsuario.html";
+          }
         }
+      } catch (error) {
+        console.error("Error al validar sesión:", error);
+        // En caso de error, lo dejamos en la página
       }
-    } catch (error) {
-      console.error('Error al validar sesión:', error);
-      // En caso de error, lo dejamos en la página
-    }
-  });
-</script>
-<script src="../js/verificarCarrito.js"></script>
-<script>
-  protegerIconoCarrito();
-</script>
-
+    });
+  </script>
+  <script src="../js/verificarCarrito.js"></script>
+  <script>
+    protegerIconoCarrito();
+  </script>
 </html>
