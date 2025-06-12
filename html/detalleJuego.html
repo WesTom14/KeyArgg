@@ -41,7 +41,7 @@
   </nav>
 
 <!-- Hero Section -->
-<div id="hero-juego" class="relative bg-cover bg-center h-auto py-16 px-4" style="background-image: url('../img/placeholder.jpg');">
+<div id="hero-juego" class="relative bg-cover bg-center h-auto py-16 px-4">
   <div class="absolute inset-0 bg-black/60"></div>
   <div class="relative max-w-6xl mx-auto text-white">
     <h1 id="titulo-juego" class="text-4xl font-bold mb-4">Nombre del juego</h1>
@@ -76,12 +76,23 @@
 </section>
 
   <!-- Carrusel -->
-<div class="relative mt-4" id="carrusel-container">
-  <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 z-10">❮</button>
-  <div id="carrusel" class="flex overflow-hidden relative w-full h-24"></div>
-  <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 z-10">❯</button>
+<div class="relative w-full max-w-6xl mx-auto">
+  <!-- Botón izquierdo -->
+  <button id="btn-prev"
+    class="absolute -left-12 top-1/2 -translate-y-1/2 carrusel-btn">‹</button>
+
+  <!-- Carrusel -->
+  <div id="carrusel" class="flex gap-4 overflow-x-auto scroll-smooth snap-x">
+    <!-- Imágenes insertadas dinámicamente -->
+  </div>
+
+  <!-- Botón derecho -->
+  <button id="btn-next"
+    class="absolute -right-12 top-1/2 -translate-y-1/2 carrusel-btn">›</button>
 </div>
- 
+
+
+
 
   <!-- Juegos similares -->
   <div class="mt-12">
@@ -148,7 +159,7 @@
     bottomNav.classList.toggle('active');
   });
 </script>
-<script src="/js/navbarEventos.js"></script>
+<script src="../js/navbarEventos.js"></script>
 <script src="../utils/utilsCarrito.js"></script>
 <script src="../js/carrito.js"></script>
 <script src="../js/detalleJuego.js"></script>
@@ -156,7 +167,6 @@
 <script>
   protegerIconoCarrito();
 </script>
-
 </body>
 
 </html>

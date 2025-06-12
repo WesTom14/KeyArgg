@@ -10,16 +10,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-<body>
-    <header class="navbar-top">
+<body>  
+<aside>
+  <header class="navbar-top">
     <div class="container">
      <a href="/html/home.html" class="logo">Key Arg</a>
 
       <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
   
       <div class="search-bar">
-        <input type="text" placeholder="Introduzca el nombre del videojuego" />
-        <button aria-label="Buscar juego"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" id="input-busqueda" placeholder="Buscar juegos..." />
+          <button id="boton-buscar">Buscar</button>
       </div>
   
       <div class="icons">
@@ -40,7 +41,7 @@
   </nav>
 
 
-<div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 py-8 gap-6">
+  <div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 py-8 gap-6">
 
   <!-- Botón toggle (solo visible en móviles) -->
   <button 
@@ -57,106 +58,52 @@
   >
     <h2 class="text-lg font-bold text-teal-900 mb-4">Filtros</h2>
 
-    <!-- Plataforma -->
-    <div class="mb-6">
-      <h3 class="text-sm font-semibold text-gray-700 mb-2">Plataforma</h3>
-      <ul class="space-y-1 text-sm text-gray-600">
-        <li><a href="#" class="hover:underline">Steam</a></li>
-        <li><a href="#" class="hover:underline">PSN</a></li>
-        <li><a href="#" class="hover:underline">Xbox Live</a></li>
-      </ul>
-    </div>
+   <!-- Plataformas -->
+  <div class="mb-6">
+    <h3 class="text-sm font-semibold text-gray-700 mb-2">Plataformas</h3>
+    <ul id="filtro-plataformas" class="space-y-1 text-sm text-gray-600"></ul>
+  </div>
 
-    <!-- Dispositivos -->
-    <div class="mb-6">
-      <h3 class="text-sm font-semibold text-gray-700 mb-2">Dispositivos</h3>
-      <ul class="space-y-1 text-sm text-gray-600">
-        <li><a href="#" class="hover:underline">PC</a></li>
-        <li><a href="#" class="hover:underline">Xbox One</a></li>
-        <li><a href="#" class="hover:underline">Xbox Series X</a></li>
-        <li><a href="#" class="hover:underline">Xbox Series S</a></li>
-        <li><a href="#" class="hover:underline">PS5</a></li>
-        <li><a href="#" class="hover:underline">Nintendo Switch</a></li>
-      </ul>
-    </div>
+  <!-- Géneros -->
+  <div class="mb-6">
+    <h3 class="text-sm font-semibold text-gray-700 mb-2">Géneros</h3>
+    <ul id="filtro-generos" class="space-y-1 text-sm text-gray-600"></ul>
+  </div>
 
-    <!-- Género -->
-    <div>
-      <h3 class="text-sm font-semibold text-gray-700 mb-2">Género</h3>
-      <ul class="space-y-1 text-sm text-gray-600">
-        <li><a href="#" class="hover:underline">Aventuras</a></li>
-        <li><a href="#" class="hover:underline">Indie</a></li>
-        <li><a href="#" class="hover:underline">Simulador</a></li>
-        <li><a href="#" class="hover:underline">Juegos de Rol</a></li>
-        <li><a href="#" class="hover:underline">Estrategia</a></li>
-      </ul>
-    </div>
   </aside>
 
   <!-- Contenido principal -->
   <main class="flex-1">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-xl font-bold">Listado de Juegos</h1>
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold">Listado de Juegos:</h1>
+      <div id="filtros-activos" class="flex gap-2"></div>
+    </div>
       <div class="flex items-center space-x-2 text-sm text-gray-600">
         <span>Ordenar por:</span>
-        <select class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
-          <option>Menor precio</option>
-          <option>Mayor precio</option>
-          <option>Nombre A-Z</option>
+        <select id="ordenar-por" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+          <option value="-"> - </option>
+          <option value="menor">Menor precio</option>
+         <option value="mayor">Mayor precio</option>
+          <option value="az">Nombre A-Z</option>
         </select>
       </div>
     </div>
 
-    <p class="text-sm text-gray-500 mb-4">Se encontraron 3 productos</p>
+    <p id="cantidad-juegos" class="text-sm text-gray-500 mb-4"></p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-  <!-- Juego 1: Schedule I -->
-  <div class="border rounded shadow-sm p-2">
-    <img src="../img/schedule.jpg" alt="Juego" class="w-full h-48 object-cover rounded">
-    <h3 class="text-base font-semibold mt-2">Schedule I</h3>
-    <p class="text-sm text-gray-500 mb-2">De pequeño distribuidor de drogas a rey del narcotráfico</p>
-    <div class="flex items-center justify-between">
-      <span class="text-teal-600 font-bold">$10.000</span>
-      <button class="text-gray-400 hover:text-blue-600 transition"><a href="../html/carrito.html">🛒</a></button>
-    </div>
-  </div>
 
-  <!-- Juego 2: Red Dead Redemption II -->
-  <div class="border rounded shadow-sm p-2">
-    <img src="../img/juegoreddead2.jpg" alt="Red Dead Redemption 2" class="w-full h-48 object-cover rounded">
-    <h3 class="text-base font-semibold mt-2"><a href="../html/detalleJuego.html">Red Dead Redemption II</a></h3>
-    <p class="text-sm text-gray-500 mb-2">Acción y aventura en un mundo abierto del Viejo Oeste</p>
-    <div class="flex items-center justify-between">
-      <span class="text-teal-600 font-bold">$7.500</span>
-      <button class="text-gray-400 hover:text-blue-600 transition"><a href="../html/carrito.html">🛒</a></button>
-    </div>
-  </div>
-
-  <!-- Juego 3: Assassin's Creed Shadows -->
-  <div class="border rounded shadow-sm p-2">
-    <img src="../img/assasins.jpg" alt="Assassin's Creed Shadows" class="w-full h-48 object-cover rounded">
-    <h3 class="text-base font-semibold mt-2">Assassin's Creed Shadows</h3>
-    <p class="text-sm text-gray-500 mb-2">Explora el Japón feudal en esta épica aventura de sigilo</p>
-    <div class="flex items-center justify-between">
-      <span class="text-teal-600 font-bold">$11.000</span>
-      <button class="text-gray-400 hover:text-blue-600 transition"><a href="../html/carrito.html">🛒</a></button>
-    </div>
-  </div>
-
+<div id="catalogo-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+  <!-- Juegos se cargan dinámicamente acá -->
 </div>
 
-    <!-- Paginación -->
-    <div class="flex items-center justify-between mt-8 text-sm text-gray-600">
-      <div class="space-x-1">
-        <button class="px-3 py-1 rounded border bg-blue-600 text-white font-semibold">1</button>
-        <button class="px-3 py-1 rounded border hover:bg-gray-200">2</button>
-        <button class="px-3 py-1 rounded border hover:bg-gray-200">Siguiente</button>
-      </div>
-      <span>Mostrando: 1 - productos de 3</span>
-    </div>
-  </main>
+<!-- Paginacion 20js -->
+<div id="paginacion" class="flex justify-center items-center mt-8 flex-wrap gap-2"></div>
+
+</main>
 </div>
+
 <br>
 
   <footer class="footer">
@@ -188,8 +135,18 @@
             <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
           </div>
         </div>
-      </footer>
-</body>
+  </footer>
+  
+<script src="../js/navbarEventos.js"></script>
+<script src="../utils/utilsCarrito.js"></script>
+<script src="../js/catalogo.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof protegerIconoCarrito === 'function') {
+      protegerIconoCarrito();
+    }
+  });
+</script>
 <script>
   const menuToggle = document.querySelector('.menu-toggle');
   const bottomNav = document.querySelector('.navbar-bottom ul');
@@ -198,13 +155,9 @@
     bottomNav.classList.toggle('active');
   });
 </script>
-<script src="/js/navbarEventos.js"></script>
 <script type="module">
   import { redirigirSiAdmin } from "../js/verificarRol.js";
   redirigirSiAdmin();
 </script>
-<script src="../js/verificarCarrito.js"></script>
-<script>
-  protegerIconoCarrito();
-</script>
+</body>
 </html>
