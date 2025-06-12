@@ -36,7 +36,9 @@ function verificarSesion(req, res, next) {
 
 app.get("/api/sesion", (req, res) => {
   if (req.session.usuario) {
-    res.json({ usuario: req.session.usuario });
+    const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+    const usuarioCompleto = usuarios.find(u => u.usuario === req.session.usuario.usuario);
+    res.json({ usuario: usuarioCompleto });
   } else {
     res.json({ usuario: null });
   }
@@ -501,6 +503,77 @@ app.get("/api/genres", async (req, res) => {
     res.status(500).json({ error: "Error al obtener géneros" });
   }
 });
+
+app.get('/api/estadisticas', (req, res) => {
+  const data = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+  const totalCompras = data.reduce((total, u) => total + (u.keys?.length || 0), 0);
+  res.json({ totalCompras });
+});
+
+app.get('/api/usuarios', (req, res) => {
+  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+  const sinPasswords = usuarios.map(({ password, ...rest }) => rest);
+  res.json(sinPasswords);
+});
+
+app.put('/api/usuario/:email/key/:key', (req, res) => {
+  const { email, key } = req.params;
+  const { nuevaKey } = req.body;
+
+  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+  const usuario = usuarios.find(u => u.usuario === email);
+
+  if (!usuario || !usuario.keys) return res.status(404).json({ mensaje: 'Usuario o key no encontrada' });
+
+  const keyObj = usuario.keys.find(k => k.key === key);
+  if (!keyObj) return res.status(404).json({ mensaje: 'Key no encontrada' });
+
+  keyObj.key = nuevaKey;
+
+  fs.writeFileSync('./usuarios.json', JSON.stringify(usuarios, null, 2));
+  res.json({ mensaje: 'Key modificada' });
+});
+
+app.delete('/api/usuario/:email/key/:key', (req, res) => {
+  const { email, key } = req.params;
+
+  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+  const usuario = usuarios.find(u => u.usuario === email);
+
+  if (!usuario || !usuario.keys) return res.status(404).json({ mensaje: 'Usuario o key no encontrada' });
+
+  usuario.keys = usuario.keys.filter(k => k.key !== key);
+
+  fs.writeFileSync('./usuarios.json', JSON.stringify(usuarios, null, 2));
+  res.json({ mensaje: 'Key eliminada' });
+});
+
+app.get('/api/info-dashboard', (req, res) => {
+  const fs = require('fs');
+  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+
+  const allKeys = usuarios.flatMap(u => u.keys || []);
+
+  // Calcular cuántos juegos tienen menos de 3 claves
+  const stockMap = {};
+  allKeys.forEach(k => {
+    const clave = `${k.juego} - ${k.plataforma}`;
+    stockMap[clave] = (stockMap[clave] || 0) + 1;
+  });
+
+  const stockBajo = Object.values(stockMap).filter(cantidad => cantidad < 3).length;
+
+  // Última venta
+  const ultima = allKeys.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))[0];
+
+  res.json({
+    stockBajo,
+    ultimaVenta: ultima ? `${ultima.juego} (${ultima.plataforma})` : 'Sin ventas'
+  });
+});
+
+
+
 
 // Levantar el servidor
 app.listen(PORT, () => {
