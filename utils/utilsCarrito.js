@@ -22,7 +22,6 @@ function agregarAlCarrito(juego) {
   .then(data => {
     if (data) {
       alert(data.mensaje);
-      window.location.href = "../html/carrito.html"; // ✅ Redirigir solo si todo salió bien
     }
   })
   .catch(err => {

@@ -55,33 +55,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       carrusel.scrollBy({ left: 270, behavior: "smooth" });
     });
 
-    screenshots.forEach((img) => {
-      const imagen = document.createElement("img");
-      imagen.src = img.image;
-      imagen.alt = "Screenshot";
-      imagen.onclick = () => window.open(img.image, "_blank");
-      carrusel.appendChild(imagen);
-    });
-
-    //  Agregar al carrito
-    const btn = document.getElementById("btn-agregar-carrito");
-    btn.addEventListener("click", () => {
-      const seleccion = selector.value;
-
-      agregarAlCarrito({
-        id: juego.id,
-        name: juego.name,
-        precio: juego.precio,
-        imagen: juego.background_image,
-        plataformas: plataformas,
-        seleccion: seleccion,
-      });
-    });
-  } catch (err) {
-    console.error("Error al cargar el detalle del juego:", err);
-  }
-});
-
 async function cargarScreenshots(id) {
   try {
     const res = await fetch(`/api/juego/${id}/screenshots`);
@@ -102,3 +75,22 @@ async function cargarScreenshots(id) {
     console.error("Error al cargar screenshots:", err);
   }
 }
+
+    //  Agregar al carrito
+    const btn = document.getElementById("btn-agregar-carrito");
+    btn.addEventListener("click", () => {
+      const seleccion = selector.value;
+
+      agregarAlCarrito({
+        id: juego.id,
+        name: juego.name,
+        precio: juego.precio,
+        imagen: juego.background_image,
+        plataformas: plataformas,
+        seleccion: seleccion,
+      });
+    });
+  } catch (err) {
+    console.error("Error al cargar el detalle del juego:", err);
+  }
+});

@@ -10,6 +10,12 @@ const nodemailer = require("nodemailer");
 //utils
 const calcularPrecio = require("./utils/calcularPrecio");
 const asignarKeysAUsuario = require("./utils/asignarKeys");
+const { MercadoPagoConfig, Preference } = require('mercadopago');
+
+const mp = new MercadoPagoConfig({
+  accessToken: process.env.MP_ACCESS_TOKEN
+});
+
 
 const app = express();
 const PORT = 3000;
@@ -395,17 +401,54 @@ app.get("/carrito", (req, res) => {
   res.json({ carrito: req.session.carrito || [] });
 });
 
-app.post("/api/test-generar-keys", (req, res) => {
-  if (!req.session.usuario || req.session.usuario.rol !== "comprador") {
-    return res.status(401).json({ mensaje: "No autorizado" });
+app.post('/api/asignar-keys-post-pago', async (req, res) => {
+  try {
+    const usuario = req.session?.usuario?.usuario;
+
+    if (!usuario) {
+      return res.status(401).json({ mensaje: "No has iniciado sesión" });
+    }
+
+    await asignarKeysAUsuario(req); // le pasás el objeto `req` completo, como espera tu función
+
+    res.json({ mensaje: "✅ Claves asignadas correctamente" });
+  } catch (err) {
+    console.error("❌ Error al asignar claves:", err);
+    res.status(500).json({ mensaje: "Error al asignar claves" });
+  }
+});
+
+app.post('/mercadopago/crear-preferencia', async (req, res) => {
+  const { carrito, total } = req.body;
+
+  if (!Array.isArray(carrito) || !total) {
+    return res.status(400).json({ error: 'Datos incompletos' });
   }
 
-  asignarKeysAUsuario(req);
+  const preference = {
+    body: {
+      items: [{
+        title: 'Compra en KeyArg',
+        unit_price: Number(total),
+        quantity: 1,
+        currency_id: 'ARS'
+      }],
+      back_urls: {
+        success: 'localhost:3000/html/perfilTusLlaves.html',
+        failure: 'localhost:3000/html/carrito.html',
+        pending: 'localhost:3000/html/carrito.html'
+      },
+      auto_return: 'approved'
+    }
+  };
 
-  res.json({
-    mensaje: "Keys generadas correctamente",
-    usuario: req.session.usuario.usuario,
-  });
+  try {
+    const response = await new Preference(mp).create(preference);
+    res.json({ init_point: response.init_point });
+  } catch (err) {
+    console.error('Error al crear preferencia:', err);
+    res.status(500).json({ error: 'Error al generar link de pago' });
+  }
 });
 
 /// Ruta para obtener juegos desde RAWG con soporte de filtros

@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "express-session": "^1.18.1",
     "keyargg": "file:",
+    "mercadopago": "^2.7.0",
     "node": "^22.16.0",
     "nodemailer": "^7.0.3"
   }

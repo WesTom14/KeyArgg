@@ -141,6 +141,39 @@ document.addEventListener('click', (e) => {
     });
   }
 });
+document.getElementById('btn-continuar-pago')?.addEventListener('click', async () => {
+  if (!carrito.length) {
+    return alert("Tu carrito está vacío.");
+  }
+  const precioOficial = carrito.reduce((acc, juego) => acc + juego.precio, 0);
+  const descuento = Math.round(precioOficial * 0.3);
+  const subtotal = precioOficial - descuento;
+  try {
+    const res = await fetch('/mercadopago/crear-preferencia', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        carrito,
+        total: subtotal // 👈 lo enviamos explícitamente
+      }),
+      credentials: 'include'
+    });
+
+    const data = await res.json();
+
+    if (data.init_point) {
+      window.location.href = data.init_point; // Redirige al link de pago
+    } else {
+      alert("No se pudo iniciar el pago.");
+    }
+
+  } catch (error) {
+    console.error("Error al crear preferencia:", error);
+    alert("Error al intentar continuar al pago.");
+  }
+});
 
 });
 
