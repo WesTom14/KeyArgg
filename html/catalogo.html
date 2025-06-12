@@ -1,163 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catalogo - KeyArg</title>
-    <link rel="icon" href="../img/icono.png" type="image/png">
-    <link rel="stylesheet" href="../css/styleCatalogo.css">
-    <script src="https://kit.fontawesome.com/3f705065cb.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../img/icono.png" type="image/png" />
+    <link rel="stylesheet" href="../css/styleCatalogo.css" />
+    <script
+      src="https://kit.fontawesome.com/3f705065cb.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header class="navbar-top">
+      <div class="container">
+        <a href="/html/home.html" class="logo">Key Arg</a>
 
-</head>
-<body>  
-<aside>
-  <header class="navbar-top">
-    <div class="container">
-     <a href="/html/home.html" class="logo">Key Arg</a>
+        <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
 
-      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
-  
-      <div class="search-bar">
-        <input type="text" id="input-busqueda" placeholder="Buscar juegos..." />
+        <div class="search-bar">
+          <input
+            type="text"
+            id="input-busqueda"
+            placeholder="Buscar juegos..."
+          />
           <button id="boton-buscar">Buscar</button>
+        </div>
+
+        <div class="icons">
+          <a class="icon" title="Carrito de compras" href="#" id="icono-carrito"
+            ><i class="fa-solid fa-cart-shopping"> </i
+          ></a>
+          <a
+            class="icon"
+            title="Perfil de usuario"
+            href="../html/perfilUsuario.html"
+            ><i class="fa-solid fa-user"> </i
+          ></a>
+        </div>
       </div>
-  
-      <div class="icons">
-        <a class="icon" title="Carrito de compras" href="#" id="icono-carrito"><i class="fa-solid fa-cart-shopping"> </i></a>
-        <a class="icon" title="Perfil de usuario" href="../html/perfilUsuario.html"><i class="fa-solid fa-user"> </i></a>
-      </div>
-    </div>
-  </header>
-  
-  <!-- Navbar inferior -->
-  <nav class="navbar-bottom" id="bottomNav">
-    <ul>
-      <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
-      <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
-      <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
-      <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
-    </ul>
-  </nav>
+    </header>
 
+    <!-- Navbar inferior -->
+    <nav class="navbar-bottom" id="bottomNav">
+      <ul>
+        <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+        <li>
+          <a href="../html/home.html#categorias" class="generos">Géneros</a>
+        </li>
+        <li>
+          <a href="../html/home.html#recomendaciones-id">Recomendaciones</a>
+        </li>
+        <li>
+          <a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a>
+        </li>
+      </ul>
+    </nav>
 
-  <div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 py-8 gap-6">
+    <div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 py-8 gap-6">
+      <!-- Botón toggle (solo visible en móviles) -->
+      <button
+        class="md:hidden bg-blue-600 text-white px-4 py-2 rounded mb-4"
+        onclick="document.getElementById('sidebar-filtros').classList.toggle('hidden')"
+      >
+        Mostrar filtros
+      </button>
 
-  <!-- Botón toggle (solo visible en móviles) -->
-  <button 
-    class="md:hidden bg-blue-600 text-white px-4 py-2 rounded mb-4"
-    onclick="document.getElementById('sidebar-filtros').classList.toggle('hidden')"
-  >
-    Mostrar filtros
-  </button>
+      <!-- Sidebar de filtros -->
+      <aside
+        id="sidebar-filtros"
+        class="hidden md:block w-full md:w-64 bg-gray-100 p-4 rounded shadow-sm"
+      >
+        <h2 class="text-lg font-bold text-teal-900 mb-4">Filtros</h2>
 
-  <!-- Sidebar de filtros -->
-  <aside 
-    id="sidebar-filtros"
-    class="hidden md:block w-full md:w-64 bg-gray-100 p-4 rounded shadow-sm"
-  >
-    <h2 class="text-lg font-bold text-teal-900 mb-4">Filtros</h2>
+        <!-- Plataformas -->
+        <div class="mb-6">
+          <h3 class="text-sm font-semibold text-gray-700 mb-2">Plataformas</h3>
+          <ul
+            id="filtro-plataformas"
+            class="space-y-1 text-sm text-gray-600"
+          ></ul>
+        </div>
 
-   <!-- Plataformas -->
-  <div class="mb-6">
-    <h3 class="text-sm font-semibold text-gray-700 mb-2">Plataformas</h3>
-    <ul id="filtro-plataformas" class="space-y-1 text-sm text-gray-600"></ul>
-  </div>
+        <!-- Géneros -->
+        <div class="mb-6">
+          <h3 class="text-sm font-semibold text-gray-700 mb-2">Géneros</h3>
+          <ul id="filtro-generos" class="space-y-1 text-sm text-gray-600"></ul>
+        </div>
+      </aside>
 
-  <!-- Géneros -->
-  <div class="mb-6">
-    <h3 class="text-sm font-semibold text-gray-700 mb-2">Géneros</h3>
-    <ul id="filtro-generos" class="space-y-1 text-sm text-gray-600"></ul>
-  </div>
-
-  </aside>
-
-  <!-- Contenido principal -->
-  <main class="flex-1">
-    <div class="flex items-center justify-between mb-4">
-      <div class="flex items-center gap-2">
-        <h1 class="text-xl font-bold">Listado de Juegos:</h1>
-      <div id="filtros-activos" class="flex gap-2"></div>
-    </div>
-      <div class="flex items-center space-x-2 text-sm text-gray-600">
-        <span>Ordenar por:</span>
-        <select id="ordenar-por" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
-          <option value="-"> - </option>
-          <option value="menor">Menor precio</option>
-         <option value="mayor">Mayor precio</option>
-          <option value="az">Nombre A-Z</option>
-        </select>
-      </div>
-    </div>
-
-    <p id="cantidad-juegos" class="text-sm text-gray-500 mb-4"></p>
-
-
-
-<div id="catalogo-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-  <!-- Juegos se cargan dinámicamente acá -->
-</div>
-
-<!-- Paginacion 20js -->
-<div id="paginacion" class="flex justify-center items-center mt-8 flex-wrap gap-2"></div>
-
-</main>
-</div>
-
-<br>
-
-  <footer class="footer">
-        <div class="footer-col">
-          <a href="/html/home.html" class="logo">Key Arg</a>
-          <p>Tu tienda de claves digitales en Argentina</p>
-          <div class="flex items-center gap-2 mt-2">
-            <img src="../img/visa.png" alt="Visa" class="w-[50px] bg-white rounded p-1 shadow-md">
-            <img src="../img/ms.png" alt="MasterCard" class="w-[50px] bg-white rounded p-1 shadow-md">
-            <img src="../img/mp.png" alt="Mercado Pago" class="w-[50px] bg-white rounded p-1 shadow-md">
+      <!-- Contenido principal -->
+      <main class="flex-1">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold">Listado de Juegos:</h1>
+            <div id="filtros-activos" class="flex gap-2"></div>
+          </div>
+          <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <span>Ordenar por:</span>
+            <select
+              id="ordenar-por"
+              class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            >
+              <option value="-">-</option>
+              <option value="menor">Menor precio</option>
+              <option value="mayor">Mayor precio</option>
+              <option value="az">Nombre A-Z</option>
+            </select>
           </div>
         </div>
-      
-        <div class="footer-col">
-          <h3>Menú</h3>
-          <ul>
-            <li><a href="../html/home.html">Inicio</a></li>
-            <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
-            <li><a href="../html/home.html#categorias" class="generos">Géneros</a></li>
-            <li><a href="../html/home.html#recomendaciones-id" >Recomendaciones</a></li>
-            <li><a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a></li>
-          </ul>
-        </div>
-      
-        <div class="footer-col">
-          <p>Proyecto Académico</p>
-          <strong>Laboratorio III - Diseño 1</strong>
-          <div class="logo-uni">
-            <img src="../img/aconcagua1.PNG" alt="Logo Universidad">
-          </div>
-        </div>
-  </footer>
-  
-<script src="../js/navbarEventos.js"></script>
-<script src="../utils/utilsCarrito.js"></script>
-<script src="../js/catalogo.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof protegerIconoCarrito === 'function') {
-      protegerIconoCarrito();
-    }
-  });
-</script>
-<script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const bottomNav = document.querySelector('.navbar-bottom ul');
 
-  menuToggle.addEventListener('click', () => {
-    bottomNav.classList.toggle('active');
-  });
-</script>
-<script type="module">
-  import { redirigirSiAdmin } from "../js/verificarRol.js";
-  redirigirSiAdmin();
-</script>
-</body>
+        <p id="cantidad-juegos" class="text-sm text-gray-500 mb-4"></p>
+
+        <div
+          id="catalogo-grid"
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4"
+        >
+          <!-- Juegos se cargan dinámicamente acá -->
+        </div>
+
+        <!-- Paginacion 20js -->
+        <div
+          id="paginacion"
+          class="flex justify-center items-center mt-8 flex-wrap gap-2"
+        ></div>
+      </main>
+    </div>
+
+    <br />
+
+    <footer class="footer">
+      <div class="footer-col">
+        <a href="/html/home.html" class="logo">Key Arg</a>
+        <p>Tu tienda de claves digitales en Argentina</p>
+        <div class="flex items-center gap-2 mt-2">
+          <img
+            src="../img/visa.png"
+            alt="Visa"
+            class="w-[50px] bg-white rounded p-1 shadow-md"
+          />
+          <img
+            src="../img/ms.png"
+            alt="MasterCard"
+            class="w-[50px] bg-white rounded p-1 shadow-md"
+          />
+          <img
+            src="../img/mp.png"
+            alt="Mercado Pago"
+            class="w-[50px] bg-white rounded p-1 shadow-md"
+          />
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3>Menú</h3>
+        <ul>
+          <li><a href="../html/home.html">Inicio</a></li>
+          <li><a href="../html/catalogo.html">Explorar catálogo</a></li>
+          <li>
+            <a href="../html/home.html#categorias" class="generos">Géneros</a>
+          </li>
+          <li>
+            <a href="../html/home.html#recomendaciones-id">Recomendaciones</a>
+          </li>
+          <li>
+            <a href="../html/home.html#ofertas" class="oferta">¡Ofertas!</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p>Proyecto Académico</p>
+        <strong>Laboratorio III - Diseño 1</strong>
+        <div class="logo-uni">
+          <img src="../img/aconcagua1.PNG" alt="Logo Universidad" />
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/navbarEventos.js"></script>
+    <script src="../utils/utilsCarrito.js"></script>
+    <script src="../js/catalogo.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (typeof protegerIconoCarrito === "function") {
+          protegerIconoCarrito();
+        }
+      });
+    </script>
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const bottomNav = document.querySelector(".navbar-bottom ul");
+
+      menuToggle.addEventListener("click", () => {
+        bottomNav.classList.toggle("active");
+      });
+    </script>
+    <script type="module">
+      import { redirigirSiAdmin } from "../js/verificarRol.js";
+      redirigirSiAdmin();
+    </script>
+  </body>
 </html>

@@ -10,12 +10,11 @@ const nodemailer = require("nodemailer");
 //utils
 const calcularPrecio = require("./utils/calcularPrecio");
 const asignarKeysAUsuario = require("./utils/asignarKeys");
-const { MercadoPagoConfig, Preference } = require('mercadopago');
+const { MercadoPagoConfig, Preference } = require("mercadopago");
 
 const mp = new MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN
+  accessToken: process.env.MP_ACCESS_TOKEN,
 });
-
 
 const app = express();
 const PORT = 3000;
@@ -42,8 +41,10 @@ function verificarSesion(req, res, next) {
 
 app.get("/api/sesion", (req, res) => {
   if (req.session.usuario) {
-    const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
-    const usuarioCompleto = usuarios.find(u => u.usuario === req.session.usuario.usuario);
+    const usuarios = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
+    const usuarioCompleto = usuarios.find(
+      (u) => u.usuario === req.session.usuario.usuario
+    );
     res.json({ usuario: usuarioCompleto });
   } else {
     res.json({ usuario: null });
@@ -401,7 +402,7 @@ app.get("/carrito", (req, res) => {
   res.json({ carrito: req.session.carrito || [] });
 });
 
-app.post('/api/asignar-keys-post-pago', async (req, res) => {
+app.post("/api/asignar-keys-post-pago", async (req, res) => {
   try {
     const usuario = req.session?.usuario?.usuario;
 
@@ -411,43 +412,45 @@ app.post('/api/asignar-keys-post-pago', async (req, res) => {
 
     await asignarKeysAUsuario(req); // le pasás el objeto `req` completo, como espera tu función
 
-    res.json({ mensaje: "✅ Claves asignadas correctamente" });
+    res.json({ mensaje: "Claves asignadas correctamente" });
   } catch (err) {
-    console.error("❌ Error al asignar claves:", err);
+    console.error("Error al asignar claves:", err);
     res.status(500).json({ mensaje: "Error al asignar claves" });
   }
 });
 
-app.post('/mercadopago/crear-preferencia', async (req, res) => {
+app.post("/mercadopago/crear-preferencia", async (req, res) => {
   const { carrito, total } = req.body;
 
   if (!Array.isArray(carrito) || !total) {
-    return res.status(400).json({ error: 'Datos incompletos' });
+    return res.status(400).json({ error: "Datos incompletos" });
   }
 
   const preference = {
     body: {
-      items: [{
-        title: 'Compra en KeyArg',
-        unit_price: Number(total),
-        quantity: 1,
-        currency_id: 'ARS'
-      }],
+      items: [
+        {
+          title: "Compra en KeyArg",
+          unit_price: Number(total),
+          quantity: 1,
+          currency_id: "ARS",
+        },
+      ],
       back_urls: {
-        success: 'localhost:3000/html/perfilTusLlaves.html',
-        failure: 'localhost:3000/html/carrito.html',
-        pending: 'localhost:3000/html/carrito.html'
+        success: "localhost:3000/html/perfilTusLlaves.html",
+        failure: "localhost:3000/html/carrito.html",
+        pending: "localhost:3000/html/carrito.html",
       },
-      auto_return: 'approved'
-    }
+      auto_return: "approved",
+    },
   };
 
   try {
     const response = await new Preference(mp).create(preference);
     res.json({ init_point: response.init_point });
   } catch (err) {
-    console.error('Error al crear preferencia:', err);
-    res.status(500).json({ error: 'Error al generar link de pago' });
+    console.error("Error al crear preferencia:", err);
+    res.status(500).json({ error: "Error al generar link de pago" });
   }
 });
 
@@ -547,76 +550,84 @@ app.get("/api/genres", async (req, res) => {
   }
 });
 
-app.get('/api/estadisticas', (req, res) => {
-  const data = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
-  const totalCompras = data.reduce((total, u) => total + (u.keys?.length || 0), 0);
+app.get("/api/estadisticas", (req, res) => {
+  const data = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
+  const totalCompras = data.reduce(
+    (total, u) => total + (u.keys?.length || 0),
+    0
+  );
   res.json({ totalCompras });
 });
 
-app.get('/api/usuarios', (req, res) => {
-  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+app.get("/api/usuarios", (req, res) => {
+  const usuarios = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
   const sinPasswords = usuarios.map(({ password, ...rest }) => rest);
   res.json(sinPasswords);
 });
 
-app.put('/api/usuario/:email/key/:key', (req, res) => {
+app.put("/api/usuario/:email/key/:key", (req, res) => {
   const { email, key } = req.params;
   const { nuevaKey } = req.body;
 
-  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
-  const usuario = usuarios.find(u => u.usuario === email);
+  const usuarios = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
+  const usuario = usuarios.find((u) => u.usuario === email);
 
-  if (!usuario || !usuario.keys) return res.status(404).json({ mensaje: 'Usuario o key no encontrada' });
+  if (!usuario || !usuario.keys)
+    return res.status(404).json({ mensaje: "Usuario o key no encontrada" });
 
-  const keyObj = usuario.keys.find(k => k.key === key);
-  if (!keyObj) return res.status(404).json({ mensaje: 'Key no encontrada' });
+  const keyObj = usuario.keys.find((k) => k.key === key);
+  if (!keyObj) return res.status(404).json({ mensaje: "Key no encontrada" });
 
   keyObj.key = nuevaKey;
 
-  fs.writeFileSync('./usuarios.json', JSON.stringify(usuarios, null, 2));
-  res.json({ mensaje: 'Key modificada' });
+  fs.writeFileSync("./usuarios.json", JSON.stringify(usuarios, null, 2));
+  res.json({ mensaje: "Key modificada" });
 });
 
-app.delete('/api/usuario/:email/key/:key', (req, res) => {
+app.delete("/api/usuario/:email/key/:key", (req, res) => {
   const { email, key } = req.params;
 
-  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
-  const usuario = usuarios.find(u => u.usuario === email);
+  const usuarios = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
+  const usuario = usuarios.find((u) => u.usuario === email);
 
-  if (!usuario || !usuario.keys) return res.status(404).json({ mensaje: 'Usuario o key no encontrada' });
+  if (!usuario || !usuario.keys)
+    return res.status(404).json({ mensaje: "Usuario o key no encontrada" });
 
-  usuario.keys = usuario.keys.filter(k => k.key !== key);
+  usuario.keys = usuario.keys.filter((k) => k.key !== key);
 
-  fs.writeFileSync('./usuarios.json', JSON.stringify(usuarios, null, 2));
-  res.json({ mensaje: 'Key eliminada' });
+  fs.writeFileSync("./usuarios.json", JSON.stringify(usuarios, null, 2));
+  res.json({ mensaje: "Key eliminada" });
 });
 
-app.get('/api/info-dashboard', (req, res) => {
-  const fs = require('fs');
-  const usuarios = JSON.parse(fs.readFileSync('./usuarios.json', 'utf-8'));
+app.get("/api/info-dashboard", (req, res) => {
+  const fs = require("fs");
+  const usuarios = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
 
-  const allKeys = usuarios.flatMap(u => u.keys || []);
+  const allKeys = usuarios.flatMap((u) => u.keys || []);
 
   // Calcular cuántos juegos tienen menos de 3 claves
   const stockMap = {};
-  allKeys.forEach(k => {
+  allKeys.forEach((k) => {
     const clave = `${k.juego} - ${k.plataforma}`;
     stockMap[clave] = (stockMap[clave] || 0) + 1;
   });
 
-  const stockBajo = Object.values(stockMap).filter(cantidad => cantidad < 3).length;
+  const stockBajo = Object.values(stockMap).filter(
+    (cantidad) => cantidad < 3
+  ).length;
 
   // Última venta
-  const ultima = allKeys.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))[0];
+  const ultima = allKeys.sort(
+    (a, b) => new Date(b.fecha) - new Date(a.fecha)
+  )[0];
 
   res.json({
     stockBajo,
-    ultimaVenta: ultima ? `${ultima.juego} (${ultima.plataforma})` : 'Sin ventas'
+    ultimaVenta: ultima
+      ? `${ultima.juego} (${ultima.plataforma})`
+      : "Sin ventas",
   });
 });
-
-
-
 
 // Levantar el servidor
 app.listen(PORT, () => {

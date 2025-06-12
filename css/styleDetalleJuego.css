@@ -57,6 +57,7 @@
     }
 
     .search-bar {
+      color: black;
       display: flex;
       align-items: center;
       flex-wrap: wrap;

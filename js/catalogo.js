@@ -10,6 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     ordering: null,
   };
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchParam = urlParams.get("search");
+
+  //guardo busquedas desde fuera de catalago.html
+  if (searchParam) {
+    currentFiltros.search = searchParam;
+  }
+
   // mapeos de nombre plataforma
   function obtenerNombrePlataforma(id) {
     const plataformas = {
@@ -268,14 +276,14 @@ document.addEventListener("DOMContentLoaded", () => {
     botonBuscar.addEventListener("click", () => {
       const termino = inputBusqueda.value.trim();
 
-      //  Limpiar otros filtros al buscar por nombre
+      currentFiltros.search = termino;
+
+      // Limpiar otros filtros al buscar por nombre
       currentFiltros.platform = null;
       currentFiltros.genre = null;
       currentFiltros.ordering = null;
 
       actualizarFiltrosActivos();
-      currentFiltros.search = termino;
-
       cargarJuegos(1);
     });
 
@@ -283,13 +291,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Enter") {
         const termino = inputBusqueda.value.trim();
 
+        currentFiltros.search = termino;
+
         currentFiltros.platform = null;
         currentFiltros.genre = null;
         currentFiltros.ordering = null;
 
         actualizarFiltrosActivos();
-        currentFiltros.search = termino;
-
         cargarJuegos(1);
       }
     });
