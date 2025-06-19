@@ -1,6 +1,6 @@
 # 🎮 KeyArg - Tienda Virtual de Claves de Videojuegos
 
-Proyecto Final Integrador - Laboratorio III  
+Proyecto Final Integrador - Laboratorio III  / Diseño I
 Universidad del Aconcagua – Licenciatura en Informática y Desarrollo de Software  
 Grupo 8: Córdoba Víctor, Tartaglia Juan, Silvestre Ramiro, Romero Ignacio, Weimberg Tomás  
 
