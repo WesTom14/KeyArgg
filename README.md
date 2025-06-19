@@ -1,6 +1,7 @@
+
 # 🎮 KeyArg - Tienda Virtual de Claves de Videojuegos
 
-Proyecto Final Integrador - Laboratorio III y Diseño I
+Proyecto Final Integrador - Laboratorio III y Diseño I 
 Universidad del Aconcagua – Licenciatura en Informática y Desarrollo de Software  
 Grupo 8: Córdoba Víctor, Tartaglia Juan, Silvestre Ramiro, Romero Ignacio, Weimberg Tomás  
 
@@ -50,3 +51,96 @@ Grupo 8: Córdoba Víctor, Tartaglia Juan, Silvestre Ramiro, Romero Ignacio, Wei
 - **Control de versiones:** Git + GitHub
 
 ---
+
+## 📦 Instalación y Uso
+
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/tu-usuario/keyarg.git
+cd keyarg
+```
+
+2. **Instalar dependencias**
+```bash
+npm install
+```
+
+3. **Configurar variables de entorno**
+Crear un archivo `.env` en la raíz del proyecto con el siguiente formato:
+
+```env
+EMAIL_USER=tu_correo@gmail.com
+EMAIL_PASS=tu_password_app
+MERCADOPAGO_TOKEN=token_de_sandbox
+```
+
+4. **Ejecutar el servidor**
+```bash
+node server.js
+```
+
+5. **Abrir en navegador**
+```url
+http://localhost:3000
+```
+
+---
+
+## 🧪 Estructura del Proyecto
+
+```plaintext
+├── public/
+│   ├── html/ (vistas .html)
+│   ├── css/
+│   └── js/
+├── data/
+│   └── usuarios.json
+├── routes/
+├── utils/
+│   └── generarClave.js
+├── server.js
+└── .env
+```
+
+---
+
+## 📅 Metodología Ágil
+
+El desarrollo fue organizado en 5 sprints:
+
+1. **Sprint 1:** Relevamiento, objetivos, prototipo inicial.
+2. **Sprint 2:** Setup técnico, diseño UX/UI (Figma), versión base.
+3. **Sprint 3:** Integración con RAWG, vista detalle, catálogo.
+4. **Sprint 4:** Autenticación, sesiones, recuperación de contraseña.
+5. **Sprint 5:** Carrito, pagos con Mercado Pago, panel administrador.
+
+---
+
+## 🎨 Diseño UX/UI
+
+- Inspirado en sitios como **Instant Gaming**, **Nuuvem** y **G2A**.
+- Tema visual oscuro, responsivo y adaptado a mobile.
+- Carrusel de screenshots funcional.
+- Jerarquías claras para precio, botones y secciones clave.
+
+> Prototipo inicial disponible en Figma: *[enlace al prototipo]*
+
+---
+
+## 📌 Consideraciones Finales
+
+Este proyecto simula un entorno simulado de comercio electrónico para la venta de videojuegos, incluyendo aspectos de seguridad, pagos y manejo de usuarios.  
+Todo el sistema fue desarrollado y validado para funcionar de forma fluida y coherente, ofreciendo una experiencia completa al usuario.
+
+---
+
+## 🧑‍🏫 Docentes
+
+- Ing. Carina Rodríguez  
+- Ing. Carlos Yácomo
+
+---
+
+## 📜 Licencia
+
+Este proyecto fue desarrollado exclusivamente con fines educativos.
