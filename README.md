@@ -134,13 +134,6 @@ Todo el sistema fue desarrollado y validado para funcionar de forma fluida y coh
 
 ---
 
-## 🧑‍🏫 Docentes
-
-- Ing. Carina Rodríguez  
-- Ing. Carlos Yácomo
-
----
-
 ## 📜 Licencia
 
 Este proyecto fue desarrollado exclusivamente con fines educativos.
