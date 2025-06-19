@@ -123,7 +123,7 @@ El desarrollo fue organizado en 5 sprints:
 - Carrusel de screenshots funcional.
 - Jerarquías claras para precio, botones y secciones clave.
 
-> Prototipo inicial disponible en Figma: *[enlace al prototipo]*
+> Prototipo inicial disponible en Figma: *https://www.figma.com/design/0seFiyvl2eO1Jhmqqh7GQW/KeyAr?node-id=0-1*
 
 ---
 
